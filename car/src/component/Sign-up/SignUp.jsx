@@ -688,7 +688,7 @@ const SignUp = () => {
         <form className="sign-up-form" onSubmit={onSubmitHandler}>
           {state === "Sign Up" && (
             <div className="inputGroup inputGroup0">
-              <label htmlFor="name">Full name</label>
+              <label htmlFor="name"></label>
               <div className="icon-fullname">
                 <i className="ri-user-line"></i>
                 <input
@@ -711,7 +711,7 @@ const SignUp = () => {
               isEmailFocused || email ? "focusWithText" : ""
             }`}
           >
-            <label htmlFor="email1">Email</label>
+            <label htmlFor="email1"></label>
             <div className="input-mail">
               <i className="ri-mail-line"></i>
               <input
@@ -727,11 +727,11 @@ const SignUp = () => {
                 ref={emailRef}
               />
             </div>
-            <p className="helper helper1">email@domain.com</p>
+
             <span className="indicator"></span>
           </div>
           <div className="inputGroup inputGroup2">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password"></label>
             <div className="input-password">
               <i className="ri-lock-line"></i>
               <input
