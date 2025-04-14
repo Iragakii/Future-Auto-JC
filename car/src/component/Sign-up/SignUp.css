@@ -1,0 +1,278 @@
+/* Login.css - Responsive Version */
+:root {
+    --primary-color: #3A5E77;
+    --secondary-color: #8D8D8D;
+    --background-color: #FFFFFF;
+    --accent-color: #A9DDF3;
+    --error-color: #CC4A6C;
+  }
+  
+  /* Base Styles */
+  .all-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0;
+    margin-left: 800px;
+  }
+  
+  .svgContainer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    perspective: 1000px;
+  }
+  
+  .mySVG {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+  
+  .inputGroup {
+    position: relative;
+    margin: 0 0 20px;
+    padding: 0;
+    border: none;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .inputGroup input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    
+    background: transparent;
+    font-size: 1em;
+    color: var(--primary-color);
+    font-weight: 300;
+    transition: all 0.3s ease;
+  }
+  
+  .inputGroup input:focus {
+    outline: none;
+   
+  }
+  .btn-login{
+    display: flex;
+    margin-top:10px;
+    justify-content: space-between; 
+      
+  }
+  
+  
+  #login {
+    background: #A9DDF3;
+    color: white;
+    border: none; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 4px; 
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-right: 20px;
+
+
+    
+   
+  }
+  #sign-up-2 {
+    background: var(--primary-color);
+    color: white;
+    border: none; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 4px; 
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    
+  }
+  #sign-up-2:hover {
+    background: #2C485F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  #login:hover {
+    background: #2C485F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .forgot-password {
+    text-decoration: none;
+    margin: 10px 0px 0px 180px;
+  }
+  .forgot{
+    color: #006A71;
+    
+
+  }
+  /* SVG Animation Styles */
+  .body {
+    transition: all 0.5s ease;
+  }
+  
+  .earL, .earR {
+    transition: all 0.5s ease;
+  }
+  
+  .eyeL, .eyeR {
+    transition: all 0.5s ease;
+  }
+  
+  .nose {
+    transition: all 0.5s ease;
+  }
+  
+  .mouth {
+    transition: all 0.5s ease;
+  }
+  
+  .chin {
+    transition: all 0.5s ease;
+  }
+  
+  /* Animation Enhancements */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Error State Styles */
+  .inputGroup.error input {
+    border-bottom-color: var(--error-color);
+  }
+  
+  .inputGroup.error label {
+    color: var(--error-color);
+  }
+  
+  .inputGroup.error .indicator {
+    background: var(--error-color);
+  }
+  
+  /* Accessibility Focus Styles */
+  input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  button:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (min-width: 768px) {
+    .svgContainer {
+      width: 250px;
+      height: 250px;
+      margin-bottom: 30px;
+    }
+    
+    .inputGroup input {
+      font-size: 1.2em;
+      padding: 15px 0;
+    }
+    
+   
+  }
+  
+  @media (min-width: 1024px) {
+    .svgContainer {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .inputGroup input {
+      font-size: 1.5em;
+    }
+    
+   
+  }
+  
+  @media (max-width: 480px) {
+    .all-login {
+      padding: 15px;
+    }
+    
+    .svgContainer {
+      width: 180px;
+      height: 180px;
+    }
+    
+    .inputGroup input {
+      font-size: 0.9em;
+      padding: 10px 0;
+    }
+    
+  
+  }
+  .icon-fullname {
+    display: flex;
+    background-color: #A9DDF3;
+    border: none;
+    border-radius: 15px;
+
+  }
+  .ri-user-line {
+    color: #006A71;
+    margin: auto;
+    margin-right: 12px;
+    margin-left: 10px;
+  }
+  .input-mail{
+    display: flex;
+    background-color: #A9DDF3;
+    border: none;
+    border-radius: 15px;
+
+  }
+  .ri-mail-line{
+    color: #006A71;
+    margin: auto;
+    margin-right: 12px;
+    margin-left: 10px;
+  }
+
+  .input-password{
+    display: flex;
+    background-color: #A9DDF3;
+    border: none;
+    border-radius: 15px;
+
+  }
+  .ri-lock-line{
+    color: #006A71;
+    margin: auto;
+    margin-right: 12px;
+    margin-left: 10px;
+  }
