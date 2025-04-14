@@ -7,7 +7,10 @@ export const AppContent = createContext();
 export const AppContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [isLoggedIn, setIsLoggedin] = useState(false);
-  const [userData, setUserData] = useState(null); // Initialize as null instead of false
+  const [userData, setUserData] = useState(null); // Start with null
+  const [loading, setLoading] = useState(true); // Add loading state
+
+  console.log("userData", userData);
 
   const getAuthState = async () => {
     try {
@@ -21,15 +24,16 @@ export const AppContextProvider = (props) => {
 
       if (data.success) {
         setIsLoggedin(true);
-        await getUserData(); // Added await to ensure getUserData completes
+        await getUserData(); // Ensure getUserData is awaited
       }
     } catch (error) {
-      // Handle 401 (Unauthorized) as a normal case
       if (error.response?.status !== 401) {
         toast.error(error.message);
       }
       setIsLoggedin(false);
       setUserData(null);
+    } finally {
+      setLoading(false); // Set loading to false once the check is complete
     }
   };
 
@@ -41,13 +45,16 @@ export const AppContextProvider = (props) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (data.success) {
         setUserData(data.userData);
       } else {
         toast.error(data.message);
+        setUserData(null); // Reset userData in case of failure
       }
     } catch (error) {
       toast.error(error.message);
+      setUserData(null);
     }
   };
 
@@ -62,6 +69,7 @@ export const AppContextProvider = (props) => {
     userData,
     setUserData,
     getUserData,
+    loading, // Provide loading state to components
   };
 
   return (

@@ -96,9 +96,45 @@ export const logout = async (req, res) => {
 };
 //  send OTP to user email
 export const sendVerifyOtp = async (req, res) => {
+  console.log("✅ sendVerifyOtp called, req.user:", req.user);
   try {
-    const { userId } = req.body;
+    // Lấy Bearer Token từ header Authorization
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(403).json({
+        success: false,
+        message: "Authorization token is required",
+      });
+    }
+
+    // Lấy token từ header
+    const token = authHeader.split(" ")[1];
+
+    // Giải mã và xác thực Bearer Token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const userId = decoded.id; // Lấy userId từ decoded token
+    console.log("📥 req.user:", req.user);
+    // Tìm người dùng trong database
     const user = await userModel.findById(userId);
+    console.log("🔍 Looking for user with ID:", userId);
+    console.log("📄 Found user:", user);
+
+    if (!user) {
+      console.log("❌ User not found in DB!");
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    console.log("✅ User found:", {
+      id: user._id,
+      email: user.email,
+      verified: user.verified,
+      // thêm các trường cần debug khác nếu muốn
+    });
+    // Kiểm tra xem tài khoản đã xác thực hay chưa
     if (user.isAccountVerified) {
       return res.json({
         success: false,

@@ -2,13 +2,50 @@ import React, { useContext } from "react";
 import logo from "../../asset/aston.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCcJcb } from "@fortawesome/free-brands-svg-icons";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { AppContent } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { userData, backendUrl, setUserData, setIsLoggedin } =
     useContext(AppContent);
+  const sendVerificationOtp = async () => {
+    try {
+      const token = localStorage.getItem("token"); // or use your state management/store
 
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/send-verify-otp",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (data.success) {
+        navigate("/email-verify");
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const { data } = await axios.post(backendUrl + "/api/auth/logout");
+      data.success && setIsLoggedin(false);
+      data.success && setUserData(false);
+      navigate("/");
+    } catch {
+      toast.error(error.message);
+    }
+  };
   return (
     <>
       <div className="up">
@@ -38,9 +75,18 @@ const Header = () => {
               <FontAwesomeIcon className="cart" icon={faCcJcb} />
             </Link>
             {userData ? (
-              <div className="user-initial">
-                {userData.name.charAt(0).toUpperCase()}{" "}
-                {/* Show first initial */}
+              <div className="user-menu">
+                <div className="user-initial">
+                  {userData.name?.charAt().toUpperCase()}
+                  <div className="dropdown">
+                    <ul>
+                      {!userData?.isAccountVerified && (
+                        <li onClick={sendVerificationOtp}>Verify Email</li>
+                      )}
+                      <li onClick={logout}>Log out</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             ) : (
               <Link to="/sign-up">
