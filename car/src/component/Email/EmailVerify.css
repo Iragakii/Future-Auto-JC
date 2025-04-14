@@ -1,0 +1,316 @@
+/* EmailVerify.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css');
+
+:root {
+  --bg: #1a1a1a;
+  --text: #f5f5f5;
+  --accent: #00ff88;
+  --hover-accent: #D2FF72;
+  --glow: 0 0 10px rgba(0, 255, 136, 0.8);
+  --form-bg: rgba(30, 30, 30, 0.95);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  position: relative;
+  margin-bottom: 200px;
+}
+
+/* Text Animation Styles */
+.text-animation-container {
+  text-align: center;
+  z-index: 2;
+  margin-top: auto; /* Push to top */
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.holographic-text {
+  color: var(--accent);
+  display: inline-block;
+  min-width: 200px;
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.holographic-text:hover {
+  color: var(--hover-accent);
+  text-shadow: var(--glow);
+  animation: holographic 0.5s infinite alternate;
+}
+
+@keyframes holographic {
+  from {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(210, 255, 114, 0.9);
+  }
+}
+
+.cursor {
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.letter-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.move-letter {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: #E7CCCC;
+  margin-right: 0.5rem;
+}
+
+.ri-mail-check-fill {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  color: #A5DEE5;
+}
+
+.ri-arrow-up-line {
+  color: var(--accent);
+}
+
+/* OTP Form Styles - Centered in the page */
+.otp-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto; /* Center vertically */
+  position: relative;
+}
+
+.otp-form {
+  background-color: var(--form-bg);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.otp-form:hover {
+  transform: translateY(-5px);
+}
+
+.otp-form h2 {
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  font-size: clamp(1.5rem, 4vw, 1.8rem);
+  text-align: center;
+}
+
+.otp-form p {
+  color: var(--text);
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  text-align: center;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.otp-inputs input {
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: rgba(10, 10, 10, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.otp-inputs input:focus,
+.otp-inputs input.active {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  transform: translateY(-2px);
+}
+
+.verify-button {
+  background-color: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.verify-button:hover {
+  background-color: var(--hover-accent);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  transform: translateY(-2px);
+}
+
+.verify-button:active {
+  transform: translateY(0);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    gap: 1.5rem;
+    padding: 1rem;
+    justify-content: flex-start;
+  }
+
+  .otp-form {
+    padding: 1.5rem;
+  }
+
+  .otp-inputs input {
+    width: 40px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: 1rem;
+    padding-top: 2rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .otp-inputs {
+    gap: 0.5rem;
+  }
+
+  .otp-inputs input {
+    width: 35px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .verify-button {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .letter-icon {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .ri-mail-check-fill {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .otp-inputs input {
+    width: 30px;
+    height: 40px;
+  }
+}
+
+/* Short screen height adjustment */
+@media (max-height: 700px) {
+  .container {
+    padding-top: 1rem;
+    gap: 1rem;
+  }
+  
+  .text-animation-container {
+    margin-bottom: 0;
+  }
+
+  .otp-container {
+    margin-top: 0;
+  }
+}
+.error-message {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+  }
+  
+  .resend-link {
+    background: none;
+    border: none;
+    color: var(--accent);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0;
+    font-size: inherit;
+  }
+  
+  .resend-link:hover {
+    color: var(--hover-accent);
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
+  
+  .verify-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+  }

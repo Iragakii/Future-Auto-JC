@@ -18,6 +18,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
+    "@types/gsap": "^1.20.2",
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",

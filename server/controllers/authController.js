@@ -60,6 +60,7 @@ export const login = async (req, res) => {
   try {
     // Check if user exists
     const user = await userModel.findOne({ email });
+    console.log(user);
     if (!user) {
       return res.json({ success: false, message: "Invalid Email" });
     }
@@ -83,6 +84,17 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(403).json({
+        success: false,
+        message: "Authorization token is required",
+      });
+    }
+
+    // Lấy token từ header
+    const token = authHeader.split(" ")[1];
+
     res.clearCookie("token", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -91,7 +103,7 @@ export const logout = async (req, res) => {
 
     return res.json({ success: true, message: "Logout successfully" });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    return res.json({ success: false, message: "token is not defined" });
   }
 };
 //  send OTP to user email
@@ -113,11 +125,12 @@ export const sendVerifyOtp = async (req, res) => {
     // Giải mã và xác thực Bearer Token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const userId = decoded.id; // Lấy userId từ decoded token
-    console.log("📥 req.user:", req.user);
+    const userId = decoded.id;
+    console.log("revice haha :", userId); // Lấy userId từ decoded token
+
     // Tìm người dùng trong database
     const user = await userModel.findById(userId);
-    console.log("🔍 Looking for user with ID:", userId);
+
     console.log("📄 Found user:", user);
 
     if (!user) {
@@ -128,12 +141,6 @@ export const sendVerifyOtp = async (req, res) => {
       });
     }
 
-    console.log("✅ User found:", {
-      id: user._id,
-      email: user.email,
-      verified: user.verified,
-      // thêm các trường cần debug khác nếu muốn
-    });
     // Kiểm tra xem tài khoản đã xác thực hay chưa
     if (user.isAccountVerified) {
       return res.json({
@@ -161,36 +168,112 @@ export const sendVerifyOtp = async (req, res) => {
 };
 
 export const verifyEmail = async (req, res) => {
-  const { userId, otp } = req.body;
+  const authHeader = req.headers["authorization"];
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(403).json({
+      success: false,
+      message: "Authorization token is required",
+    });
+  }
+
+  // Lấy token từ header
+  const token = authHeader.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  const userId = decoded.id;
+
+  const { otp } = req.body;
 
   if (!userId || !otp) {
-    return res.json({ success: false, message: "Missing Details" });
+    console.log("[Verify Email] Missing details - userId or otp not provided");
+    return res.status(400).json({
+      success: false,
+      message: "Missing Details",
+    });
   }
+
   try {
+    console.log(`[Verify Email] Looking up user with ID: ${userId}`);
     const user = await userModel.findById(userId);
+
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      console.log("[Verify Email] User not found in database");
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
+
+    console.log("[Verify Email] User found:", {
+      id: user._id,
+      email: user.email,
+      isVerified: user.isAccountVerified,
+      storedOtp: user.verifyOtp ? "******" : "empty",
+      otpExpiry: new Date(user.verifyOtpExpireAt).toISOString(),
+    });
+
+    if (user.isAccountVerified) {
+      console.log("[Verify Email] User already verified");
+      return res.json({
+        success: true,
+        message: "Account already verified",
+      });
+    }
+
     if (user.verifyOtp === "" || user.verifyOtp !== otp) {
-      return res.json({ success: false, message: "Invalid OTP" });
+      console.log("[Verify Email] OTP mismatch", {
+        inputOtp: otp,
+        storedOtp: user.verifyOtp ? "******" : "empty",
+      });
+      return res.status(400).json({
+        success: false,
+        message: "Invalid OTP",
+      });
     }
+
     if (user.verifyOtpExpireAt < Date.now()) {
-      return res.json({ success: false, message: "OTP expired" });
+      console.log("[Verify Email] OTP expired", {
+        currentTime: new Date().toISOString(),
+        expiryTime: new Date(user.verifyOtpExpireAt).toISOString(),
+      });
+      return res.status(400).json({
+        success: false,
+        message: "OTP expired",
+      });
     }
+
+    console.log("[Verify Email] OTP verification successful. Updating user...");
     user.isAccountVerified = true;
     user.verifyOtp = "";
-    user.verifyOtpExpireAt = 0;
+    user.verifyOtpExpireAt = null;
 
+    // FIX: Add await here
     await user.save();
+
+    // FIX: Verify the update by fetching fresh data
+    const updatedUser = await userModel.findById(userId);
+    console.log("[Verify Email] Post-save verification:", {
+      isVerified: updatedUser.isAccountVerified,
+    });
+
     return res.json({
       success: true,
       message: "Account verified successfully",
+      user: {
+        id: updatedUser._id,
+        email: updatedUser.email,
+        isVerified: updatedUser.isAccountVerified,
+      },
     });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.error("[Verify Email] Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
   }
 };
-
 export const isAuthenticated = async (req, res) => {
   try {
     return res.json({ success: true });
@@ -236,7 +319,7 @@ export const resetPassword = async (req, res) => {
     return res.json({ success: false, message: "All fields are required" });
   }
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findById({ email });
     if (!user) {
       return res.json({ success: false, message: "User not found" });
     }
@@ -265,5 +348,44 @@ export const resetPassword = async (req, res) => {
     });
   } catch (error) {
     return res.json({ success: false, message: error.message });
+  }
+};
+export const resendOtp = async (req, res) => {
+  try {
+    const userId = req.user._id; // Assuming userAuth middleware attaches the user
+
+    // Find the user
+    const user = await userModel.findOne(userId);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Check if already verified
+    if (user.isAccountVerified) {
+      return res.json({ success: true, message: "Account already verified" });
+    }
+
+    // Generate new OTP
+    const newOtp = generateOTP(6); // Your OTP generation function
+    const otpExpiry = Date.now() + 15 * 60 * 1000; // 15 minutes expiry
+
+    // Update user record
+    user.verifyOtp = newOtp;
+    user.verifyOtpExpireAt = otpExpiry;
+    await user.save();
+
+    // Send OTP to user's email (implementation depends on your email service)
+    // await sendVerificationEmail(user.email, newOtp);
+
+    return res.json({
+      success: true,
+      message: "New OTP sent successfully",
+      otp: newOtp, // Remove this in production - only for development/testing
+    });
+  } catch (error) {
+    console.error("Resend OTP error:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };
