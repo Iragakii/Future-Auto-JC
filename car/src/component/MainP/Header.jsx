@@ -38,11 +38,22 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      const { data } = await axios.post(backendUrl + "/api/auth/logout");
+      const token = localStorage.getItem("token");
+      console.log("ttttt :", token);
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include token if required
+          },
+        }
+      );
+      console.log("tttttxx :", token);
       data.success && setIsLoggedin(false);
       data.success && setUserData(false);
       navigate("/");
-    } catch {
+    } catch (error) {
       toast.error(error.message);
     }
   };
@@ -101,3 +112,10 @@ const Header = () => {
 };
 
 export default Header;
+
+<div className="letter-icon">
+  <span className="move-letter">
+    .move your mouse to green letter, have fun{" "}
+  </span>
+  <i className="ri-mail-check-fill"></i>
+</div>;
