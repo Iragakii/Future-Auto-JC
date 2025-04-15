@@ -50,7 +50,7 @@ const Ek = () => {
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}
       >
-        <Ak position={[0, -0.3, 0]} scale={[0.7, 0.7, 0.7]}></Ak>
+        <Ak position={[0, -0.3, 0]} scale={[0.9, 0.9, 0.9]}></Ak>
       </PresentationControls>
       {/* <ContactShadows position={[0, -0.1, 0]} opacity={0.75} scale={10} blur={3} far={4} /> */}
       <Environment preset="city" />

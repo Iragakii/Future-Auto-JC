@@ -86,7 +86,7 @@ export default function EmailVerify() {
       e.preventDefault();
 
       const token = localStorage.getItem("token");
-      console.log("ttttt :", token);
+
       const otpArray = inputRefs.current.map((e) => e.value);
       const otp = otpArray.join("");
       const userId = userData._id;
