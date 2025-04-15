@@ -1,0 +1,189 @@
+/* Base styles */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.car-slideshow-container {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left Car Image */
+.left-car-image {
+  position: fixed;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20%;
+  max-width: 300px;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: none;
+}
+
+.left-car-image.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.left-car-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  display: block;
+}
+
+/* Car Slides */
+.car-slide {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.center-image-container {
+  width: 60%;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  overflow: hidden;
+  /* No border styles here */
+}
+
+.center-image {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 10px;
+  border: 3px solid; /* Border ONLY on the image */
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* First and last slide image border handling */
+
+
+/* Car Content Styles */
+.car-content {
+  width: 60%;
+  max-width: 600px;
+  text-align: center;
+  background: #BEE4D0;
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+ 
+}
+
+.car-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.car-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  
+}
+
+.car-specs p {
+  font-size: 1.0rem;
+  color: #555;
+  margin: 0.5rem 0;
+  font-weight: bold;
+  padding: 0.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+}
+
+.status {
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.status.available {
+  background-color: rgba(46, 125, 50, 0.15);
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.status.sold {
+  background-color: rgba(198, 40, 40, 0.15);
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .center-image-container,
+  .car-content {
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-car-image {
+    display: none;
+  }
+  
+  .center-image-container,
+  .car-content {
+    width: 90%;
+  }
+  
+  .car-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .center-image {
+    border-radius: 8px;
+    border-width: 2px;
+  }
+  
+  .center-image.first-slide {
+    border-top: 2px solid #fff;
+  }
+  
+  .center-image.last-slide {
+    border-bottom: 2px solid #fff;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-content {
+    padding: 15px;
+  }
+  
+  .car-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .car-specs {
+    grid-template-columns: 1fr;
+  }
+  
+  .status {
+    padding: 0.5rem 1.2rem;
+  }
+}

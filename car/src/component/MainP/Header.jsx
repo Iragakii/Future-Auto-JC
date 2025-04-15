@@ -39,7 +39,6 @@ const Header = () => {
   const logout = async () => {
     try {
       const token = localStorage.getItem("token");
-      console.log("ttttt :", token);
       const { data } = await axios.post(
         backendUrl + "/api/auth/logout",
         {},
@@ -49,7 +48,7 @@ const Header = () => {
           },
         }
       );
-      console.log("tttttxx :", token);
+
       data.success && setIsLoggedin(false);
       data.success && setUserData(false);
       navigate("/");
@@ -66,13 +65,13 @@ const Header = () => {
           </Link>
           <div className="up-left">
             <Link className="up-home" to="/best">
-              <span>Super</span>
+              <span>SUPER</span>
             </Link>
             <Link className="up-home" to="">
-              <span>Old Car</span>
+              <span>OLD CAR</span>
             </Link>
             <Link className="up-home" to="">
-              <span>Race</span>
+              <span>RACE</span>
             </Link>
             <Link className="up-home" to="">
               <span>About Us</span>
