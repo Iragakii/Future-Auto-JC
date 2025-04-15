@@ -4,7 +4,9 @@ import Header from "./Header";
 import Left from "./Left";
 import "./Left.css";
 import Ek from "../bestcar/Ek";
-
+import CSSMarquee from "./Marquee";
+import PageTwo from "../Pagetwo/pagetwo";
+import Data from "../Data";
 const MainPage = () => {
   return (
     <>
@@ -19,6 +21,14 @@ const MainPage = () => {
           <Ek></Ek>
         </Canvas>
       </div>
+      <CSSMarquee
+        text=" Aston Martin • Merserdez • BWM • Ferrari • Roll Royce • Bentley • Nissan • Porches 
+        • Maserti • Bugati • Toyota • Honda • Mazda  • Lexus • Hongqi • Tesla • Subaru • Chevrolet  • Ford • Jaguar
+        • Developer • Designer  "
+        speed={50}
+      ></CSSMarquee>
+      <PageTwo></PageTwo>
+      <Data></Data>
     </>
   );
 };
