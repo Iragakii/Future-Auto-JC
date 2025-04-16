@@ -12,15 +12,30 @@ export const AppContextProvider = (props) => {
 
   console.log("userData", userData);
 
+  // Add axios interceptor to add Authorization header automatically
+  // Move interceptor setup inside useEffect to avoid multiple registrations
+  useEffect(() => {
+    const interceptor = axios.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem("token");
+        console.log("Axios interceptor token:", token);
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+    return () => {
+      axios.interceptors.request.eject(interceptor);
+    };
+  }, []);
+
   const getAuthState = async () => {
     try {
-      const token = localStorage.getItem("token");
-      console.log(token); // Get token from storage
-      const { data } = await axios.get(backendUrl + "/api/auth/is-auth", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.get(backendUrl + "/api/auth/is-auth");
 
       if (data.success) {
         setIsLoggedin(true);
@@ -41,12 +56,7 @@ export const AppContextProvider = (props) => {
 
   const getUserData = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const { data } = await axios.get(backendUrl + `/api/user/data`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.get(backendUrl + `/api/user/data`);
 
       if (data.success) {
         setUserData(data.userData);
