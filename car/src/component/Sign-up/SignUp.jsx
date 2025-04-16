@@ -15,11 +15,10 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false); // Added loading state
 
   // ... (keep all your existing animation code and refs)
-
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    // Form validation
+    // Form validation (keep your existing validation code)
     if (state === "Sign Up" && !name.trim()) {
       toast.error("Please enter your name");
       return;
@@ -53,41 +52,43 @@ const SignUp = () => {
               password: password.trim(),
             }
           : { email: email.trim(), password: password.trim() };
-      console.log(123);
+
       const { data } = await axios.post(endpoint, payload, config);
-      console.log(data);
+
       if (data?.success) {
         if (data.token) {
           localStorage.setItem("token", data.token);
         }
         setIsLoggedin(true);
         getUserData();
+
         toast.success(
           state === "Sign Up"
             ? "Account created successfully!"
             : "Logged in successfully!"
         );
-        navigate("/", { replace: true });
+
+        // Check if user is admin and redirect accordingly
+        if (state === "Login" && data.user?.role === "admin") {
+          navigate("/admin", { replace: true }); // Redirect to admin page
+        } else {
+          navigate("/", { replace: true }); // Redirect regular users to home
+        }
       } else {
         toast.error(data?.message || "Authentication failed");
       }
     } catch (error) {
       console.error("API Error:", error);
-
-      // More detailed error handling
+      // Keep your existing error handling
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         const errorMsg =
           error.response.data?.message ||
           error.response.statusText ||
           "Request failed";
         toast.error(`Error: ${errorMsg}`);
       } else if (error.request) {
-        // The request was made but no response was received
         toast.error("Network error - no response from server");
       } else {
-        // Something happened in setting up the request that triggered an Error
         toast.error(`Error: ${error.message}`);
       }
     } finally {

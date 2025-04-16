@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/mongodb.js";
 import authRouter from "./routes/authRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import carRouter from "./routes/carRoutes.js";
+import adminRouter from "./routes/adminRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -36,7 +38,7 @@ const corsOptions = {
 };
 
 app.use(express.json());
-
+app.use(cookieParser()); // Add cookie parser
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 
@@ -44,6 +46,9 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => res.send("API Working!"));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/admin", adminRouter); // Add admin routes
+app.use(express.static("public"));
+app.use("/api/car", carRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
