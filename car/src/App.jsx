@@ -2,12 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Best from "./component/SuperCar";
 import EmailVerify from "./component/Email/EmailVerify";
-import ResetPassword from "./component/Email/ResetPassword";
-
 import MainPage from "./component/MainP/MainPage";
 import SignUp from "./component/Sign-up/SignUp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Admin from "./component/Admin/Admin";
 function App() {
   return (
     <>
@@ -22,10 +21,7 @@ function App() {
           path="/email-verify"
           element={<EmailVerify></EmailVerify>}
         ></Route>
-        <Route
-          path="/reset-password"
-          element={<ResetPassword></ResetPassword>}
-        ></Route>
+        <Route path="/admin" element={<Admin></Admin>}></Route>
       </Routes>
     </>
   );

@@ -51,37 +51,64 @@ export const register = async (req, res) => {
   }
 };
 
+// In your authController.js
 export const login = async (req, res) => {
-  const { email, password } = req.body;
-  // Check if email and password are provided
-  if (!email || !password) {
-    return res.json({ success: false, message: "All fields are required" });
-  }
   try {
-    // Check if user exists
+    const { email, password } = req.body;
+
+    // Find user
     const user = await userModel.findOne({ email });
-    console.log(user);
     if (!user) {
-      return res.json({ success: false, message: "Invalid Email" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
-    // Check if the password is correct
+    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.json({ success: false, message: "Invalid Password" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
-    // if user is valid and password is correct, create a JWT token
+    // Create token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: "1d",
     });
 
-    return res.json({ success: true, token });
+    // Return different responses based on role
+    if (user.role === "admin") {
+      return res.status(200).json({
+        success: true,
+        message: "Admin login successful",
+        token,
+        redirectTo: "/admin", // Add this flag
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "Login successful",
+        token,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
+    }
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.error("Login error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
-
 export const logout = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
