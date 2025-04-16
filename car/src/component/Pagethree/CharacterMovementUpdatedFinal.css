@@ -1,0 +1,68 @@
+.character-movement-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1.5s ease-in-out;
+  margin-top: 10px;
+}
+
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 45%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+}
+
+.text-overlay h2 {
+  font-size: 2rem;
+  color: #8E1616;
+  
+}
+
+.gif1 {
+  position: absolute; /* Adjust as needed */
+  left: 35%; /* Position next to gif2 */
+  top: 20%; /* Center vertically */
+  transform: translate(-50%, -50%);
+}
+
+/* Position gif2 to the left center and make it bigger */
+.gif2 {
+  position: absolute;
+  left: 30%; /* Adjust as needed */
+  top: 40%; /* Center vertically */
+  transform: translate(-50%, -50%);
+  width: 600px; /*Increase width */
+  height: 400px; /* Increase height */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .text-overlay h2 {
+    font-size: 1.8rem;
+  }
+  
+  .text-overlay p {
+    font-size: 1rem;
+  }
+}
+
+/* //change position gif1 */
