@@ -28,7 +28,12 @@ const MainPage = () => {
         speed={50}
       ></CSSMarquee>
       <PageTwo></PageTwo>
-      <Data></Data>
+      <CSSMarquee
+        text=" Aston Martin • Merserdez • BWM • Ferrari • Roll Royce • Bentley • Nissan • Porches 
+        • Maserti • Bugati • Toyota • Honda • Mazda  • Lexus • Hongqi • Tesla • Subaru • Chevrolet  • Ford • Jaguar
+        • Developer • Designer  "
+        speed={50}
+      ></CSSMarquee>
     </>
   );
 };

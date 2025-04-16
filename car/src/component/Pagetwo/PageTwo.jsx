@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./PageTwo.css";
-import carCenter2 from "./car-center2.jpg";
+import axios from "axios";
+
+// Local fallback images
 import carCenter1 from "./car-center1.jpg";
+import carCenter2 from "./car-center2.jpg";
 import carCenter3 from "./car-center3.jpg";
 import carCenter4 from "./car-center4.jpg";
 import carLeft1 from "./car-center1.jpg";
@@ -12,16 +15,19 @@ import carLeft4 from "./car-center4.jpg";
 const PageTwo = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showLeftImage, setShowLeftImage] = useState(false);
+  const [carData, setCarData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const containerRef = useRef(null);
   const leftImageRef = useRef(null);
   const slideRefs = useRef([]);
 
-  const carData = [
+  // Local fallback data (same as original)
+  const localCarData = [
     {
       title: "Mercedes-Benz 300SL",
       year: "06-1981",
       mileage: "1200 km",
-
       status: "Back to available",
       sold: false,
       centerImage: carCenter1,
@@ -31,7 +37,6 @@ const PageTwo = () => {
       title: "Mercedes-Benz 400SL",
       year: "03-1957",
       mileage: "8500 km",
-
       status: "Sold",
       sold: true,
       centerImage: carCenter2,
@@ -41,7 +46,6 @@ const PageTwo = () => {
       title: "Mercedes-Benz 400SL",
       year: "03-1957",
       mileage: "8500 km",
-
       status: "Sold",
       sold: true,
       centerImage: carCenter3,
@@ -51,7 +55,6 @@ const PageTwo = () => {
       title: "Mercedes-Benz 400SL",
       year: "03-1957",
       mileage: "8500 km",
-
       status: "Sold",
       sold: true,
       centerImage: carCenter4,
@@ -59,7 +62,22 @@ const PageTwo = () => {
     },
   ];
 
-  const currentCar = carData[currentSlide] || carData[0];
+  useEffect(() => {
+    const fetchCarData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/car");
+        setCarData(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching car data:", err);
+        setError(err.message);
+        setCarData(localCarData); // Fallback to local data
+        setLoading(false);
+      }
+    };
+
+    fetchCarData();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,21 +121,37 @@ const PageTwo = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Initial check
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [currentSlide]);
+  }, [currentSlide, carData]); // Add carData to dependencies
+
+  const currentCar = carData[currentSlide] || carData[0];
+
+  if (loading) {
+    return <div className="loading-message">Loading car data...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="error-message">
+        Error loading data: {error}. Using local data.
+      </div>
+    );
+  }
 
   return (
     <div className="car-slideshow-container" ref={containerRef}>
       {/* Left Car Image - only shown when actively viewing a slide */}
-      <div
-        className={`left-car-image ${showLeftImage ? "visible" : ""}`}
-        ref={leftImageRef}
-      >
-        <img
-          src={currentCar.leftImage}
-          alt="Left car view"
-          className="left-car-img"
-        />
-      </div>
+      {currentCar && (
+        <div
+          className={`left-car-image ${showLeftImage ? "visible" : ""}`}
+          ref={leftImageRef}
+        >
+          <img
+            src={currentCar.leftImage}
+            alt="Left car view"
+            className="left-car-img"
+          />
+        </div>
+      )}
 
       {/* Car Slides */}
       {carData.map((car, index) => (
