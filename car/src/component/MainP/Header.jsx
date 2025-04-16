@@ -49,10 +49,17 @@ const Header = () => {
         }
       );
 
-      data.success && setIsLoggedin(false);
-      data.success && setUserData(false);
-      navigate("/");
+      if (data.success) {
+        localStorage.removeItem("token"); // Remove token on logout
+        setIsLoggedin(false);
+        setUserData(false);
+        navigate("/");
+      }
     } catch (error) {
+      localStorage.removeItem("token"); // Remove token even if logout API fails
+      setIsLoggedin(false);
+      setUserData(false);
+      navigate("/");
       toast.error(error.message);
     }
   };

@@ -29,7 +29,7 @@ const MainPage = () => {
       ></CSSMarquee>
       <PageTwo></PageTwo>
       <CSSMarquee
-        text=" Aston Martin • Merserdez • BWM • Ferrari • Roll Royce • Bentley • Nissan • Porches 
+        text=" Aston Martin • Merserdez • Hacker • Ferrari • Sphynx • Bentley • JC Group • Iragaki  
         • Maserti • Bugati • Toyota • Honda • Mazda  • Lexus • Hongqi • Tesla • Subaru • Chevrolet  • Ford • Jaguar
         • Developer • Designer  "
         speed={50}
