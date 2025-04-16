@@ -6,7 +6,7 @@ import "./Left.css";
 import Ek from "../bestcar/Ek";
 import CSSMarquee from "./Marquee";
 import PageTwo from "../Pagetwo/pagetwo";
-import Data from "../Data";
+
 const MainPage = () => {
   return (
     <>
