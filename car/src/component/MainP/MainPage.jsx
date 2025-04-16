@@ -7,6 +7,8 @@ import Ek from "../bestcar/Ek";
 import CSSMarquee from "./Marquee";
 import PageTwo from "../Pagetwo/pagetwo";
 
+import CharacterMovementUpdated from "../Pagethree/CharacterMovementUpdated";
+
 const MainPage = () => {
   return (
     <>
@@ -34,6 +36,8 @@ const MainPage = () => {
         • Developer • Designer  "
         speed={50}
       ></CSSMarquee>
+
+      <CharacterMovementUpdated></CharacterMovementUpdated>
     </>
   );
 };
