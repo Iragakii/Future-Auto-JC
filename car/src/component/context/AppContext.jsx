@@ -27,7 +27,9 @@ export const AppContextProvider = (props) => {
         await getUserData(); // Ensure getUserData is awaited
       }
     } catch (error) {
-      if (error.response?.status !== 401) {
+      if (error.response?.status === 401) {
+        localStorage.removeItem("token"); // Remove token if unauthorized
+      } else {
         toast.error(error.message);
       }
       setIsLoggedin(false);
