@@ -1,55 +1,55 @@
 .marquee-container {
-    width: 100%;
-    overflow: hidden; /* Ensures no scrollbar appears */
-    position: relative;
-    --marquee-speed: 20s;
-    border-top: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    border-left: none;
-    border-right: none;
-    padding: 8px 0;
-    white-space: nowrap;
-    /* Additional containment */
-    box-sizing: border-box;
-    max-width: 100vw; /* Prevent horizontal overflow */
-  }
-  
+  width: 100%;
+  overflow: hidden; /* Ensures no scrollbar appears */
+  position: relative;
+  --marquee-speed: 20s;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  border-left: none;
+  border-right: none;
+  padding: 8px 0;
+  white-space: nowrap;
+  /* Additional containment */
+  box-sizing: border-box;
+  max-width: 100vw; /* Prevent horizontal overflow */
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee var(--marquee-speed) linear infinite;
+  padding-left: 100%;
+  /* Prevent any potential overflow */
+  box-sizing: border-box;
+}
+
+.marquee-rtl {
+  animation-name: marquee-rtl;
+  padding-left: 0;
+  padding-right: 100%;
+}
+
+/* Keyframes remain the same */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-rtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+/* Pause on hover */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
   .marquee-content {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee var(--marquee-speed) linear infinite;
-    padding-left: 100%;
-    /* Prevent any potential overflow */
-    box-sizing: border-box;
-  }
-  
-  .marquee-rtl {
-    animation-name: marquee-rtl;
+    animation: none;
     padding-left: 0;
-    padding-right: 100%;
+    text-align: center;
   }
-  
-  /* Keyframes remain the same */
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-  
-  @keyframes marquee-rtl {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(100%); }
-  }
-  
-  /* Pause on hover */
-  .marquee-container:hover .marquee-content {
-    animation-play-state: paused;
-  }
-  
-  /* Reduced motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-content {
-      animation: none;
-      padding-left: 0;
-      text-align: center;
-    }
-  }
+}
