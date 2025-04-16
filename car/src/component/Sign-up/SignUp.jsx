@@ -123,6 +123,8 @@ const SignUp = () => {
 
   // Initialize arm positions
   useEffect(() => {
+    let isMounted = true;
+
     armLControls.start({
       x: -93,
       y: 220,
@@ -138,6 +140,31 @@ const SignUp = () => {
       originX: 1,
       originY: 0,
     });
+
+    // Animate eyes to look down right to down left repeatedly
+    const animateEyes = async () => {
+      while (isMounted) {
+        await eyeLControls.start({ x: 10, y: 10, transition: { duration: 1 } }); // down right
+        await eyeRControls.start({ x: 10, y: 10, transition: { duration: 1 } });
+        await eyeLControls.start({
+          x: -10,
+          y: 10,
+          transition: { duration: 1 },
+        }); // down left
+        await eyeRControls.start({
+          x: -10,
+          y: 10,
+          transition: { duration: 1 },
+        });
+      }
+    };
+    if (isMounted) {
+      animateEyes().catch(() => {}); // catch to avoid unhandled promise rejection
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const getPosition = (el) => {
@@ -699,9 +726,9 @@ const SignUp = () => {
                   className="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  onFocus={onPasswordFocus}
-                  onBlur={onPasswordBlur}
-                  ref={passwordRef}
+                  onFocus={() => {}}
+                  onBlur={() => {}}
+                  ref={null}
                 />
               </div>
             </div>
