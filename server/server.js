@@ -48,6 +48,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter); // Add admin routes
 app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
 app.use("/api/car", carRouter);
 
 // Error handling middleware

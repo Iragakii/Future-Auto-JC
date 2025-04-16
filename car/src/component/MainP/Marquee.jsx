@@ -8,7 +8,7 @@ const CSSMarquee = ({
   hoverPause = true,
 }) => {
   // Create duplicated content for seamless looping
-  const duplicatedText = `${text} • ${text}• ${text}• ${text}• ${text} • ${text}  `;
+  const duplicatedText = `${text} • ${text}• ${text}• ${text} `;
 
   return (
     <div className="marquee-container">

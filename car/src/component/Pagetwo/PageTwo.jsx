@@ -66,7 +66,7 @@ const PageTwo = () => {
     const fetchCarData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/api/car");
-        setCarData(response.data);
+        setCarData(response.data.cars);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching car data:", err);
@@ -146,7 +146,11 @@ const PageTwo = () => {
           ref={leftImageRef}
         >
           <img
-            src={currentCar.leftImage}
+            src={
+              currentCar.leftImage
+                ? `http://localhost:4000/${currentCar.leftImage}`
+                : ""
+            }
             alt="Left car view"
             className="left-car-img"
           />
@@ -164,7 +168,11 @@ const PageTwo = () => {
         >
           <div className="center-image-container">
             <img
-              src={car.centerImage}
+              src={
+                car.centerImage
+                  ? `http://localhost:4000/${car.centerImage}`
+                  : ""
+              }
               alt={car.title}
               className={`center-image ${index === 0 ? "first-slide" : ""} ${
                 index === carData.length - 1 ? "last-slide" : ""
