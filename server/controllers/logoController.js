@@ -4,13 +4,28 @@ import Logo from "../models/logoModel.js";
 export const createLogo = async (req, res) => {
   try {
     console.log("Incoming request data:", req.body, req.file); // Log incoming data
-    const { title, content } = req.body;
-    const logoImage = req.file.path; // Assuming the image is uploaded and available in req.file
+    const { title, content, km, brand, location } = req.body;
+
+    if (!title || !content || !km || !brand || !location) {
+      return res.status(400).json({
+        message:
+          "All fields are required (title, content, km, brand, location)",
+      });
+    }
+
+    const logoImage = req.file ? req.file.path : "";
+
+    if (!logoImage) {
+      return res.status(400).json({ message: "Logo image is required" });
+    }
 
     const newLogo = new Logo({
       title,
       content,
       logoImage,
+      km,
+      brand,
+      location,
     });
 
     await newLogo.save();
@@ -29,12 +44,30 @@ export const createLogo = async (req, res) => {
 export const getLogos = async (req, res) => {
   try {
     const logos = await Logo.find();
-    const baseUrl = "http://localhost:4000/uploads/logos/"; // Base URL for logo images
-    const logosWithUrls = logos.map((logo) => ({
-      ...logo.toObject(),
-      logoImage: `${baseUrl}${logo.logoImage.split("\\").pop()}`, // Ensure the logoImage is a valid URL
-    }));
-    res.status(200).json({ logos: logosWithUrls }); // Return logos with updated image URLs
+
+    // Format the image URLs properly - use absolute path from server root
+    const formattedLogos = logos.map((logo) => {
+      const logoObj = logo.toObject();
+
+      // Fix the path format for Windows and Unix compatibility
+      if (logoObj.logoImage) {
+        // Handle the path to ensure it starts with /uploads
+        const imagePath = logoObj.logoImage.replace(/\\/g, "/");
+        const relativePath = imagePath.includes("/uploads")
+          ? imagePath.substring(imagePath.indexOf("/uploads"))
+          : `/uploads/logos/${imagePath.split("/").pop()}`;
+
+        logoObj.logoImage = relativePath;
+      }
+
+      return logoObj;
+    });
+
+    res.status(200).json({
+      success: true,
+      count: formattedLogos.length,
+      logos: formattedLogos,
+    });
   } catch (error) {
     console.error("Error fetching logos:", error);
     res
@@ -47,11 +80,14 @@ export const getLogos = async (req, res) => {
 export const updateLogo = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content } = req.body;
+    const { title, content, km, brand, location } = req.body;
 
     const updateData = {
       title,
       content,
+      km,
+      brand,
+      location,
     };
 
     // Update image only if a new one is uploaded
