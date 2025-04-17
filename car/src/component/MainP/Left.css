@@ -1,34 +1,32 @@
-.car-and-text{
+.car-and-text {
     display: flex;
     justify-content: space-between;
 }
-.car-and-text Canvas{
+.car-and-text Canvas {
     width: 100%;
     height: 78vh;
 }
-body{
+body {
     margin: 0;
     padding: 0;
 }
 
-.left-main-p{
-    margin:auto;
+.left-main-p {
+    margin: auto;
     margin-left: 230px;
     display: grid;
 }
-.ri-fire-fill{
+.ri-fire-fill {
     color: #F38C79;
     font-size: 25px;
     margin-right: 5px;
 }
-.first-left-main{
+.first-left-main {
     color: white;
     font-size: 25px;
     font-family: "Nunito", Helvetica, Arial, sans-serif;
-   
-    
 }
-.second-left-main{
+.second-left-main {
     color: white;
     margin-top: 50px;
     font-family: "Nunito", Helvetica, Arial, sans-serif;
@@ -37,16 +35,16 @@ body{
     white-space: nowrap;
     font-weight: bold;
 }
-.third-left-main{
+.third-left-main {
     color: white;
     margin-top: 50px;
     font-family: "Nunito", Helvetica, Arial, sans-serif;
     line-height: 35px;
 }
-.end-left-main{
+.end-left-main {
     margin-top: 50px;
 }
-.btn-left-main{
+.btn-left-main {
     padding: 17px 18px 17px 18px;
     border-radius: 15px;
     background-color: #8AB2A6;
@@ -58,12 +56,11 @@ body{
     cursor: pointer;   
     transition: 0.3s; 
 }
-.btn-left-main:hover{
+.btn-left-main:hover {
     background-color: #387478;
     color: black;
-    
 }
-.btn-left-main-2{
+.btn-left-main-2 {
     padding: 17px 18px 17px 18px;
     border-radius: 15px;
     background-color: #328E6E;
@@ -76,8 +73,47 @@ body{
     transition: 0.3s; 
     margin-left: 20px;
 }
-.btn-left-main-2:hover{
+.btn-left-main-2:hover {
     background-color: #8AB2A6;
     color: black;
-    
 }
+
+/* Responsive Styles */
+/* Responsive Styles */
+@media (max-width: 1025px) {
+    .left-main-p {
+        margin-left: 20px; /* Adjust margin for smaller screens */
+        margin-right: 20px; /* Add right margin for smaller screens */
+    }
+
+    .second-left-main {
+        font-size: 30px; /* Reduce font size for smaller screens */
+    }
+
+    .third-left-main {
+        font-size: 16px; /* Reduce font size for smaller screens */
+    }
+    .car-and-text{
+        display: flex;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .left-main-p {
+        margin-left: 20px; /* Adjust margin for smaller screens */
+        margin-right: 20px; /* Add right margin for smaller screens */
+    }
+
+    .second-left-main {
+        font-size: 30px; /* Reduce font size for smaller screens */
+    }
+
+    .third-left-main {
+        font-size: 16px; /* Reduce font size for smaller screens */
+    }
+    .car-and-text{
+        display: grid;
+    }
+}
+

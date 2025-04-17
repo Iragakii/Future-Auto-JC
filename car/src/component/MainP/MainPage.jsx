@@ -5,9 +5,9 @@ import Left from "./Left";
 import "./Left.css";
 import Ek from "../bestcar/Ek";
 import CSSMarquee from "./Marquee";
-import PageTwo from "../Pagetwo/pagetwo";
-
+import PageTwo from "../Pagetwo/PageTwo";
 import CharacterMovement from "../Pagethree/CharacterMovement";
+import Pagefour from "../Pagefour/Pagefour";
 
 const MainPage = () => {
   return (
@@ -38,6 +38,7 @@ const MainPage = () => {
       ></CSSMarquee>
 
       <CharacterMovement></CharacterMovement>
+      <Pagefour></Pagefour>
     </>
   );
 };

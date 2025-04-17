@@ -12,6 +12,7 @@
   /* Additional containment */
   box-sizing: border-box;
   max-width: 100vw; /* Prevent horizontal overflow */
+  margin-top: 18px;
 }
 
 .marquee-content {
