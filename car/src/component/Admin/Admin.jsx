@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SelectCar from "../Super/SelectCar"; // Import SelectCar component
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
@@ -29,7 +30,9 @@ const Admin = () => {
     leftImage: null,
   });
   const [newLogoData, setNewLogoData] = useState({
-    // New state for logo data
+    brand: "", // New field for brand
+    km: "", // New field for km
+    location: "", // New field for location
     title: "",
     content: "",
     logoImage: null,
@@ -64,7 +67,6 @@ const Admin = () => {
   };
 
   const fetchLogos = async () => {
-    console.log("Fetching logos..."); // Log fetching logos
     console.log("Fetching logos..."); // Log fetching logos
     try {
       const response = await axios.get(
@@ -106,6 +108,7 @@ const Admin = () => {
     fetchCars();
     fetchLogos(); // Fetch logos on component mount
   }, [token, navigate]);
+
   const handleCreateAdmin = async (e) => {
     e.preventDefault();
     try {
@@ -128,6 +131,7 @@ const Admin = () => {
       );
     }
   };
+
   const handleCreateCar = async (e) => {
     e.preventDefault();
     try {
@@ -168,24 +172,6 @@ const Admin = () => {
       );
     }
   };
-  const handleDeleteCar = async (carId) => {
-    if (!window.confirm("Are you sure you want to delete this car?")) return;
-
-    try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Car deleted successfully!");
-      fetchCars();
-    } catch (err) {
-      console.error("Error deleting car:", err);
-      alert(
-        `Error deleting car: ${err.response?.data?.message || err.message}`
-      );
-    }
-  };
 
   const handleCreateLogo = async (e) => {
     alert("Creating logo..."); // Alert when the function is called
@@ -197,6 +183,9 @@ const Admin = () => {
       const formData = new FormData();
       formData.append("title", newLogoData.title);
       formData.append("content", newLogoData.content);
+      formData.append("km", newLogoData.km); // Include km
+      formData.append("brand", newLogoData.brand); // Include brand
+      formData.append("location", newLogoData.location); // Include location
       if (newLogoData.logoImage) {
         formData.append("logoImage", newLogoData.logoImage);
       }
@@ -208,7 +197,14 @@ const Admin = () => {
         },
       });
       alert("Logo created successfully!");
-      setNewLogoData({ title: "", content: "", logoImage: null });
+      setNewLogoData({
+        title: "",
+        content: "",
+        logoImage: null,
+        brand: "",
+        km: "",
+        location: "",
+      }); // Reset all fields
       fetchLogos(); // Refresh logos after creation
     } catch (err) {
       console.error("Error creating logo:", err);
@@ -218,133 +214,7 @@ const Admin = () => {
     }
   };
 
-  const handleDeleteLogo = async (logoId) => {
-    if (!window.confirm("Are you sure you want to delete this logo?")) return;
-
-    try {
-      await axios.delete(`http://localhost:4000/api/admin/logos/${logoId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Logo deleted successfully!");
-      fetchLogos(); // Refresh logos after deletion
-    } catch (err) {
-      console.error("Error deleting logo:", err);
-      alert(
-        `Error deleting logo: ${err.response?.data?.message || err.message}`
-      );
-    }
-  };
-  const handleDeleteCenterImage = async (carId) => {
-    if (!window.confirm("Are you sure you want to delete the center image?"))
-      return;
-
-    try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}/centerImage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Center image deleted successfully!");
-      fetchCars();
-    } catch (err) {
-      console.error("Error deleting center image:", err);
-      alert(
-        `Error deleting center image: ${
-          err.response?.data?.message || err.message
-        }`
-      );
-    }
-  };
-
-  const handleDeleteLeftImage = async (carId) => {
-    if (!window.confirm("Are you sure you want to delete the left image?"))
-      return;
-
-    try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}/leftImage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Left image deleted successfully!");
-      fetchCars();
-    } catch (err) {
-      console.error("Error deleting left image:", err);
-      alert(
-        `Error deleting left image: ${
-          err.response?.data?.message || err.message
-        }`
-      );
-    }
-  };
-
-  const handleDeleteContent = async (carId) => {
-    if (!window.confirm("Are you sure you want to delete the content?")) return;
-
-    try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}/content`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Content deleted successfully!");
-      fetchCars();
-    } catch (err) {
-      console.error("Error deleting content:", err);
-      alert(
-        `Error deleting content: ${err.response?.data?.message || err.message}`
-      );
-    }
-  };
-
-  const handleUpdateRole = async (userId) => {
-    try {
-      await axios.put(
-        `http://localhost:4000/api/admin/users/${userId}/role`,
-        { role: selectedRole },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      alert("Role updated successfully!");
-      fetchUsers();
-    } catch (err) {
-      console.error("Error updating role:", err);
-      alert(
-        `Error updating role: ${err.response?.data?.message || err.message}`
-      );
-    }
-  };
-
-  const handleDeleteUser = async (userId) => {
-    if (!window.confirm("Are you sure you want to delete this user?")) return;
-
-    try {
-      await axios.delete(`http://localhost:4000/api/admin/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("User deleted successfully!");
-      fetchUsers();
-    } catch (err) {
-      console.error("Error deleting user:", err);
-      alert(
-        `Error deleting user: ${err.response?.data?.message || err.message}`
-      );
-    }
-  };
-
-  const handleFileChange = (e, field) => {
-    setNewCarData({
-      ...newCarData,
-      [field]: e.target.files[0],
-    });
-  };
+  // Other functions remain unchanged...
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -361,6 +231,45 @@ const Admin = () => {
           className="admin-form"
           aria-label="Create new logo form"
         >
+          <div className="form-group">
+            <label htmlFor="logo-brand">Brand:</label>
+            <input
+              id="logo-brand"
+              type="text"
+              placeholder="Enter logo brand"
+              value={newLogoData.brand}
+              onChange={(e) =>
+                setNewLogoData({ ...newLogoData, brand: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="logo-km">KM:</label>
+            <input
+              id="logo-km"
+              type="text"
+              placeholder="Enter logo KM"
+              value={newLogoData.km}
+              onChange={(e) =>
+                setNewLogoData({ ...newLogoData, km: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="logo-location">Location:</label>
+            <input
+              id="logo-location"
+              type="text"
+              placeholder="Enter logo location"
+              value={newLogoData.location}
+              onChange={(e) =>
+                setNewLogoData({ ...newLogoData, location: e.target.value })
+              }
+              required
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="logo-title">Title:</label>
             <input
