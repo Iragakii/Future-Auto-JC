@@ -14,6 +14,18 @@ const logoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    km: {
+      type: String,
+      required: true,
+    },
+    brand: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

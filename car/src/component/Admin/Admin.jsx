@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "./Admin.css";
 
 const Admin = () => {
+  const [selectedFilters, setSelectedFilters] = useState({
+    km: "",
+    brand: "",
+    location: "",
+  });
   const [users, setUsers] = useState([]);
   const [cars, setCars] = useState([]);
   const [logos, setLogos] = useState([]); // New state for logos
@@ -411,7 +416,10 @@ const Admin = () => {
               {logos.map((logo) => (
                 <div className="card" key={logo._id}>
                   <div className="logo">
-                    <img src={logo.logoImage} alt={logo.title} />
+                    <img
+                      src={`http://localhost:4000${logo.logoImage}`}
+                      alt={logo.title}
+                    />
                   </div>
                   <div className="contents">
                     <span className="name">{logo.title}</span>

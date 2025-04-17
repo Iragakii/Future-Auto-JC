@@ -22,7 +22,7 @@ const adminAuth = async (req, res, next) => {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Find user and check if they are admin
+    // Find user
     const user = await userModel.findById(decoded.id);
 
     if (!user) {
@@ -32,7 +32,23 @@ const adminAuth = async (req, res, next) => {
       });
     }
 
-    // Check if user is an admin
+    // Add user info to request
+    req.user = {
+      userId: decoded.id,
+      role: user.role,
+      isAccountVerified: user.isAccountVerified,
+      iat: decoded.iat,
+      exp: decoded.exp,
+    };
+
+    console.log("Authenticated user:", req.user);
+
+    // For the /logos endpoint, allow access to both verified and unverified users
+    if (req.path === "/logos") {
+      return next();
+    }
+
+    // For other admin endpoints, require admin role
     if (user.role !== "admin") {
       return res.status(403).json({
         success: false,
@@ -40,18 +56,9 @@ const adminAuth = async (req, res, next) => {
       });
     }
 
-    // Add user info to request
-    req.user = {
-      userId: decoded.id,
-      role: user.role,
-      iat: decoded.iat,
-      exp: decoded.exp,
-    };
-
-    console.log("Authenticated admin:", req.user);
     next();
   } catch (error) {
-    console.error("Admin token verification failed:", error.message);
+    console.error("Token verification failed:", error.message);
 
     // More specific error messages
     let message = "Invalid token";

@@ -1,6 +1,21 @@
 import Car from "../models/carModels.js";
 
-// Get all cars
+export const getFilteredCars = async (req, res) => {
+  const { km, brand, location } = req.query; // Get filters from query parameters
+  try {
+    let query = {};
+    if (km) query.km = km;
+    if (brand) query.brand = brand;
+    if (location) query.location = location;
+
+    const cars = await Car.find(query); // Fetch cars based on filters
+    res.status(200).json({ success: true, cars });
+  } catch (error) {
+    console.error("Error fetching filtered cars:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
 export const getCars = async (req, res) => {
   try {
     const cars = await Car.find();
