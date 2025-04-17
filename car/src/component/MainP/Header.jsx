@@ -81,7 +81,7 @@ const Header = () => {
               <span>RACE</span>
             </Link>
             <Link className="up-home" to="">
-              <span>About Us</span>
+              <span>ABOUT US</span>
             </Link>
             <Link className="up-home" to="">
               <span>Get in Touch</span>
