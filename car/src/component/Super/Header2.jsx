@@ -67,11 +67,11 @@ const Header2 = () => {
   return (
     <>
       <div className="up">
-        <div className="header">
+        <div className="header-2">
           <Link to="/">
             <img src={logo} className="logo-ma"></img>
           </Link>
-          <div className="up-left">
+          <div className="up-left-2">
             <Link className="up-home" to="/best">
               <span>SUPER</span>
             </Link>
@@ -83,9 +83,6 @@ const Header2 = () => {
             </Link>
             <Link className="up-home" to="">
               <span>ABOUT US</span>
-            </Link>
-            <Link className="up-home" to="">
-              <span>Get in Touch</span>
             </Link>
           </div>
           <div className="up-right">

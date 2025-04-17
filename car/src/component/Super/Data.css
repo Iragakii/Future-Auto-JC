@@ -1,38 +1,81 @@
-.cards{
-    display: flex;
-    padding: 30px;
-    margin-left: -30px;
+.data-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.card {
+  overflow: hidden;
+  background-color: black;
+  width: calc(25% - 30px);
+  min-width: 250px;
+  border-radius: 7px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+}
+
+.logo {
+  width: 100%;
+  height: 200px;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.contents {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.content {
+  color: whitesmoke;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    width: calc(33.33% - 30px);
   }
-  .card{
-    overflow: hidden;
-    background-color: black!important;
-    width: 25%;
-    margin-left: 30px;
-    display: block;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 30px);
   }
-  .logo1{
+}
+
+@media (max-width: 480px) {
+  .cards {
+    justify-content: center;
+  }
+  .card {
     width: 100%;
-    
+    max-width: 350px;
   }
-  .logo1 a img{
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 7px;
-  }
-  .contents{
-    display: grid;
-    margin-top: 13px;
-  }
-  .name{
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: large;
-  }
-  .mile{
-    color:whitesmoke;
-  }
-  .location{
-    color: gray;
-  }
+}
