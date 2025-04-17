@@ -4,13 +4,21 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica Neue', Arial, sans-serif;
+ 
 }
 
 .car-slideshow-container {
   width: 100%;
   margin: 0 auto;
   position: relative;
-  overflow: hidden;
+overflow: hidden;
+}
+
+.car-slideshow-container {
+  background-image: url('./old2.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
 }
 
 /* Left Car Image */
@@ -82,7 +90,7 @@ html, body {
   width: 60%;
   max-width: 600px;
   text-align: center;
-  background: #BEE4D0;
+  background: #F0F1C5;
   padding: 15px;
   border-radius: 12px;
   backdrop-filter: blur(5px);
