@@ -1,16 +1,11 @@
-import Logo from "../models/logoModel.js"; // Assuming a model for logos exists
+import Logo from "../models/logoModel.js";
 
 // Create a new logo
 export const createLogo = async (req, res) => {
   try {
+    console.log("Incoming request data:", req.body, req.file); // Log incoming data
     const { title, content } = req.body;
-    const logoImage = req.files?.logoImage ? req.files.logoImage[0].path : "";
-
-    if (!title || !content || !logoImage) {
-      return res
-        .status(400)
-        .json({ success: false, message: "All fields are required" });
-    }
+    const logoImage = req.file.path; // Assuming the image is uploaded and available in req.file
 
     const newLogo = new Logo({
       title,
@@ -19,14 +14,14 @@ export const createLogo = async (req, res) => {
     });
 
     await newLogo.save();
-
-    res.status(201).json({
-      success: true,
-      message: "Logo created successfully",
-      logo: newLogo,
-    });
+    res
+      .status(201)
+      .json({ message: "Logo created successfully!", logo: newLogo });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error creating logo:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to create logo", error: error.message });
   }
 };
 
@@ -34,9 +29,17 @@ export const createLogo = async (req, res) => {
 export const getLogos = async (req, res) => {
   try {
     const logos = await Logo.find();
-    res.json({ success: true, logos });
+    const baseUrl = "http://localhost:4000/uploads/logos/"; // Base URL for logo images
+    const logosWithUrls = logos.map((logo) => ({
+      ...logo.toObject(),
+      logoImage: `${baseUrl}${logo.logoImage.split("\\").pop()}`, // Ensure the logoImage is a valid URL
+    }));
+    res.status(200).json({ logos: logosWithUrls }); // Return logos with updated image URLs
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error fetching logos:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch logos", error: error.message });
   }
 };
 
@@ -45,24 +48,34 @@ export const updateLogo = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, content } = req.body;
-    const logoImage = req.files?.logoImage ? req.files.logoImage[0].path : "";
 
-    const logo = await Logo.findById(id);
-    if (!logo) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Logo not found" });
+    const updateData = {
+      title,
+      content,
+    };
+
+    // Update image only if a new one is uploaded
+    if (req.file) {
+      updateData.logoImage = req.file.path;
     }
 
-    logo.title = title || logo.title;
-    logo.content = content || logo.content;
-    logo.logoImage = logoImage || logo.logoImage;
+    const updatedLogo = await Logo.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
 
-    await logo.save();
+    if (!updatedLogo) {
+      return res.status(404).json({ message: "Logo not found" });
+    }
 
-    res.json({ success: true, message: "Logo updated successfully", logo });
+    res.status(200).json({
+      message: "Logo updated successfully!",
+      logo: updatedLogo,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error updating logo:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to update logo", error: error.message });
   }
 };
 
@@ -70,16 +83,21 @@ export const updateLogo = async (req, res) => {
 export const deleteLogo = async (req, res) => {
   try {
     const { id } = req.params;
-    const logo = await Logo.findById(id);
-    if (!logo) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Logo not found" });
+
+    const deletedLogo = await Logo.findByIdAndDelete(id);
+
+    if (!deletedLogo) {
+      return res.status(404).json({ message: "Logo not found" });
     }
 
-    await Logo.findByIdAndDelete(id);
-    res.json({ success: true, message: "Logo deleted successfully" });
+    res.status(200).json({
+      message: "Logo deleted successfully!",
+      logo: deletedLogo,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error deleting logo:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to delete logo", error: error.message });
   }
 };

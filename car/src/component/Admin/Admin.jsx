@@ -60,6 +60,7 @@ const Admin = () => {
 
   const fetchLogos = async () => {
     console.log("Fetching logos..."); // Log fetching logos
+    console.log("Fetching logos..."); // Log fetching logos
     try {
       const response = await axios.get(
         "http://localhost:4000/api/admin/logos",

@@ -1,4 +1,6 @@
-
+#root {
+  width: 100%;
+}
 *{
     margin: 0;
     padding: 0; 
@@ -19,21 +21,22 @@
     background-color: black;
   }
   
-  .header{
+  .header-2{
     display: flex;
     justify-content: space-between;
     margin: 0;
     padding: 0;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
   }
   .logo-ma{
     width: 200px;
     margin-left: 50px;
     
   }
-  .up-left{
+  .up-left-2{
     margin: auto;
-    margin-left: 150px;
+    margin-left: 50px;
+    margin-right: 50px;
   }
   .up-home{
     text-decoration: none;
