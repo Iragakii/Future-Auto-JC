@@ -21,7 +21,8 @@ try {
 
 // Fixed allowed origins - remove space and add both server and frontend ports
 const allowedOrigins = [
-  "http://localhost:5173", // hoặc domain thực tế của frontend
+  "http://localhost:5173",
+  "http://localhost:5174", // hoặc domain thực tế của frontend
 ];
 
 const corsOptions = {

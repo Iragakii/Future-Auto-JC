@@ -121,7 +121,7 @@ const Pagefour = () => {
               <i className="ri-music-fill"></i>
             </Link>
             <Link to="https://opensea.io/iragaki" className="Link-icon">
-              <i class="ri-ghost-2-fill"></i>
+              <i className="ri-ghost-2-fill"></i>
             </Link>
             <Link to="https://iragaki.io.vn/" className="Link-icon">
               <i className="ri-aliens-fill"></i>
@@ -196,7 +196,7 @@ const Pagefour = () => {
               to="https://www.facebook.com/share/1AiGYWBRDS/"
               className="Link-icon"
             >
-              <i class="ri-facebook-circle-line"></i>
+              <i className="ri-facebook-circle-line"></i>
             </Link>
             <Link to="https://www.instagram.com/iragaki/" className="Link-icon">
               <i className="ri-instagram-line"></i>
@@ -204,7 +204,7 @@ const Pagefour = () => {
           </div>
         </div>
       </div>
-      <h2 className="email">Email : jcgroup.vni@gmail.com</h2>
+      <h2 className="email-contact">Email : jcgroup.vni@gmail.com</h2>
       <h2 className="phone">Phone : 0349906998</h2>
     </footer>
   );
