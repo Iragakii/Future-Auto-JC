@@ -67,18 +67,26 @@ function Data({ filters }) {
   useEffect(() => {
     if (!logos.length || !filters) return;
 
-    console.log("Applying filters:", filters);
+    console.log("Applying filters:", filters); // Log the current filters
 
     const filtered = logos.filter((logo) => {
-      const kmMatch = !filters.km || logo.km === filters.km;
-      const brandMatch = !filters.brand || logo.brand === filters.brand;
+      const brandMatch =
+        !filters.brand ||
+        (logo.brand &&
+          logo.brand.toLowerCase() === filters.brand.toLowerCase());
+      const kmMatch =
+        !filters.km || (logo.km && logo.km.replace(" KM", "") === filters.km);
+
       const locationMatch =
-        !filters.location || logo.location === filters.location;
+        !filters.location ||
+        (logo.location &&
+          logo.location.toLowerCase() === filters.location.toLowerCase());
 
       return kmMatch && brandMatch && locationMatch;
     });
 
     console.log("Filtered logos:", filtered);
+    console.log("Applying filters:", filters); // Log the filtered logos
     setFilteredLogos(filtered);
   }, [filters, logos]);
 

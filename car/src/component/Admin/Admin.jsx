@@ -13,6 +13,7 @@ const Admin = () => {
   const [users, setUsers] = useState([]);
   const [cars, setCars] = useState([]);
   const [logos, setLogos] = useState([]); // New state for logos
+  const [filteredLogos, setFilteredLogos] = useState([]); // State for filtered logos
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [newAdminData, setNewAdminData] = useState({
@@ -78,6 +79,7 @@ const Admin = () => {
         }
       );
       setLogos(response.data.logos);
+      setFilteredLogos(response.data.logos); // Initialize filtered logos
     } catch (err) {
       console.error("Error fetching logos:", err);
     }
@@ -108,6 +110,14 @@ const Admin = () => {
     fetchCars();
     fetchLogos(); // Fetch logos on component mount
   }, [token, navigate]);
+
+  useEffect(() => {
+    // Filter logos based on selected brand
+    const filtered = logos.filter((logo) =>
+      selectedFilters.brand ? logo.brand === selectedFilters.brand : true
+    );
+    setFilteredLogos(filtered);
+  }, [selectedFilters, logos]);
 
   const handleCreateAdmin = async (e) => {
     e.preventDefault();
@@ -318,11 +328,11 @@ const Admin = () => {
       <div className="admin-section">
         <h2>Manage Logos</h2>
         <div className="logos-list">
-          {logos.length === 0 ? (
+          {filteredLogos.length === 0 ? (
             <p>No logos found.</p>
           ) : (
             <div className="cards">
-              {logos.map((logo) => (
+              {filteredLogos.map((logo) => (
                 <div className="card" key={logo._id}>
                   <div className="logo">
                     <img
