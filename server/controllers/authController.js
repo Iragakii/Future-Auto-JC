@@ -303,7 +303,13 @@ export const verifyEmail = async (req, res) => {
 };
 export const isAuthenticated = async (req, res) => {
   try {
-    return res.json({ success: true });
+    if (!req.user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "User not authenticated" });
+    }
+    console.log("isAuthenticated called. User:", req.user);
+    return res.json({ success: true, user: req.user });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import Header from "./MainP/Header";
-import Eb from "./BestCar/Eb";
+
+import Eb from "../BestCar/Eb";
 import { Canvas } from "@react-three/fiber";
-import Ec from "./BestCar/Ec";
-import Ed from "./BestCar/Ed";
+import Ec from "../BestCar/Ec";
+import Ed from "../BestCar/Ed";
 import Auction from "./SelectCar";
 import Data from "./Data";
+import "./SuperCar.css";
+import Header2 from "./Header2";
 
 const Best = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -21,7 +23,7 @@ const Best = () => {
 
   return (
     <>
-      <Header />
+      <Header2></Header2>
       <div className="slider-container" style={sliderContainerStyle}>
         <Canvas
           shadows

@@ -36,9 +36,8 @@ const MainPage = () => {
         • Developer • Designer  "
         speed={50}
       ></CSSMarquee>
-
-      <CharacterMovement></CharacterMovement>
       <Pagefour></Pagefour>
+      <CharacterMovement></CharacterMovement>
     </>
   );
 };
