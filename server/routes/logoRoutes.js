@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createLogo } from "../controllers/logoController";
+import { createLogo, getLogos } from "../controllers/logoController"; // Import getLogos
 import multer from "multer";
 const upload = multer({ dest: "uploads/logos/" }); // Set the destination for logo images
 import authenticateToken from "../middleware/authMiddleware"; // Import authentication middleware
@@ -13,5 +13,8 @@ router.post(
   upload.single("logoImage"),
   createLogo
 );
+
+// Route for fetching all logos
+router.get("/logos", authenticateToken, getLogos); // Add this line
 
 export default router;

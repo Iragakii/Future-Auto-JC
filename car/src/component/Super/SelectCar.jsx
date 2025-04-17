@@ -21,6 +21,7 @@ function SelectCar({ onFilterChange }) {
     if (onFilterChange) {
       onFilterChange(newFilters);
     }
+    console.log("Updated filters:", { ...filters, [name]: value });
   };
 
   return (
@@ -45,6 +46,7 @@ function SelectCar({ onFilterChange }) {
             <option value="13000">13000</option>
             <option value="8000">8000</option>
             <option value="10000">10000</option>
+            <option value="2000">2000</option>
             <option value="9000">9000</option>
           </select>
 
@@ -55,7 +57,7 @@ function SelectCar({ onFilterChange }) {
             value={filters.brand}
             onChange={handleFilterChange}
           >
-            <option value="">All Brands</option>
+            <option value="">All Brand</option>
             <option value="Mersedes-Benz">Mersedes-Benz</option>
             <option value="Mazda">Mazda</option>
             <option value="Porches">Porches</option>
