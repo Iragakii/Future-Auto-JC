@@ -1,12 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Best from "./component/SuperCar";
+
 import EmailVerify from "./component/Email/EmailVerify";
 import MainPage from "./component/MainP/MainPage";
 import SignUp from "./component/Sign-up/SignUp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./component/Admin/Admin";
+import Best from "./component/Super/SuperCar";
+
 function App() {
   return (
     <>
