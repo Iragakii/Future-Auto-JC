@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-
 import Eb from "../BestCar/Eb";
 import { Canvas } from "@react-three/fiber";
 import Ec from "../BestCar/Ec";
 import Ed from "../BestCar/Ed";
-import Auction from "./SelectCar";
 import Data from "./Data";
 import "./SuperCar.css";
 import Header2 from "./Header2";
+import SelectCar from "./SelectCar";
 
 const Best = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [filters, setFilters] = useState({
+    km: "",
+    brand: "",
+    location: "",
+  });
+
   const slides = [<Eb />, <Ec />, <Ed />];
 
   const nextSlide = () => {
@@ -19,6 +24,11 @@ const Best = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleFilterChange = (newFilters) => {
+    console.log("Filters updated:", newFilters);
+    setFilters(newFilters);
   };
 
   return (
@@ -63,8 +73,8 @@ const Best = () => {
           ))}
         </div>
       </div>
-      <Auction></Auction>
-      <Data></Data>
+      <SelectCar onFilterChange={handleFilterChange} />
+      <Data filters={filters} />
     </>
   );
 };
