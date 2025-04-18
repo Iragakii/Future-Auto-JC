@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Eb from "../BestCar/Eb";
 import { Canvas } from "@react-three/fiber";
 import Ec from "../BestCar/Ec";
 import Ed from "../BestCar/Ed";
@@ -7,6 +6,8 @@ import Data from "./Data";
 import "./SuperCar.css";
 import Header2 from "./Header2";
 import SelectCar from "./SelectCar";
+import El from "../BestCar/El";
+import Em from "../BestCar/Em";
 
 const Best = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -16,7 +17,7 @@ const Best = () => {
     location: "",
   });
 
-  const slides = [<Eb />, <Ec />, <Ed />];
+  const slides = [<Ed />, <Ec />, <El />, <Em />];
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);

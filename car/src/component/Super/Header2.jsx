@@ -72,13 +72,14 @@ const Header2 = () => {
             <img src={logo} className="logo-ma"></img>
           </Link>
           <div className="up-left-2">
+            <Link className="up-home" to="/oldcar">
+              <span>OLD CAR</span>
+            </Link>
             <Link className="up-home" to="/best">
               <span>SUPER</span>
             </Link>
-            <Link className="up-home" to="">
-              <span>OLD CAR</span>
-            </Link>
-            <Link className="up-home" to="">
+
+            <Link className="up-home" to="/race">
               <span>RACE</span>
             </Link>
             <Link className="up-home" to="">
