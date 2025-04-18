@@ -2,6 +2,7 @@
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  
 }
 
 .cards {
@@ -11,15 +12,17 @@
   padding: 30px;
   justify-content: flex-start;
   cursor: pointer;
+  
 }
 
 .card {
   overflow: hidden;
-  background-color: black;
+  background-color:  #03A791;;
   width: calc(25% - 30px);
   min-width: 250px;
   border-radius: 7px;
   transition: transform 0.3s ease;
+
 }
 
 .card:hover {
@@ -46,7 +49,7 @@
 }
 
 .name {
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 1.2rem;
   margin: 0;
@@ -136,10 +139,11 @@
 .no-logos {
   text-align: center;
   padding: 40px;
-  font-size: 1.2rem;
-  color: #666;
-  background-color: #f9f9f9;
+  font-size: 2.2rem;
+  color: #F7CFD8;
+  background-color: #328E6E;
   border-radius: 8px;
+  margin: auto;
 }
 
 /* Responsive adjustments */

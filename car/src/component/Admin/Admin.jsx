@@ -182,6 +182,114 @@ const Admin = () => {
       );
     }
   };
+  const handleDeleteCar = async (carId) => {
+    if (!window.confirm("Are you sure you want to delete this car?")) return;
+
+    try {
+      await axios.delete(`http://localhost:4000/api/car/${carId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Car deleted successfully!");
+      fetchCars();
+    } catch (err) {
+      console.error("Error deleting car:", err);
+      alert(
+        `Error deleting car: ${err.response?.data?.message || err.message}`
+      );
+    }
+  };
+  const handleDeleteLogo = async (logoId) => {
+    if (!window.confirm("Are you sure you want to delete this logo?")) return;
+
+    if (!token) {
+      alert("You must be logged in to delete a logo.");
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:4000/api/admin/logos/${logoId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Logo deleted successfully!");
+      fetchLogos(); // Refresh logos after deletion
+    } catch (err) {
+      console.error("Error deleting logo:", err);
+      if (err.response) {
+        console.error("Response data:", err.response.data);
+        console.error("Response status:", err.response.status);
+        console.error("Response headers:", err.response.headers);
+      }
+      alert(
+        `Error deleting logo: ${err.response?.data?.message || err.message}`
+      );
+    }
+  };
+  const handleDeleteCenterImage = async (carId) => {
+    if (!window.confirm("Are you sure you want to delete the center image?"))
+      return;
+
+    try {
+      await axios.delete(`http://localhost:4000/api/car/${carId}/centerImage`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Center image deleted successfully!");
+      fetchCars();
+    } catch (err) {
+      console.error("Error deleting center image:", err);
+      alert(
+        `Error deleting center image: ${
+          err.response?.data?.message || err.message
+        }`
+      );
+    }
+  };
+
+  const handleDeleteLeftImage = async (carId) => {
+    if (!window.confirm("Are you sure you want to delete the left image?"))
+      return;
+
+    try {
+      await axios.delete(`http://localhost:4000/api/car/${carId}/leftImage`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Left image deleted successfully!");
+      fetchCars();
+    } catch (err) {
+      console.error("Error deleting left image:", err);
+      alert(
+        `Error deleting left image: ${
+          err.response?.data?.message || err.message
+        }`
+      );
+    }
+  };
+
+  const handleDeleteContent = async (carId) => {
+    if (!window.confirm("Are you sure you want to delete the content?")) return;
+
+    try {
+      await axios.delete(`http://localhost:4000/api/car/${carId}/content`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Content deleted successfully!");
+      fetchCars();
+    } catch (err) {
+      console.error("Error deleting content:", err);
+      alert(
+        `Error deleting content: ${err.response?.data?.message || err.message}`
+      );
+    }
+  };
 
   const handleCreateLogo = async (e) => {
     alert("Creating logo..."); // Alert when the function is called
@@ -224,6 +332,12 @@ const Admin = () => {
     }
   };
 
+  const handleFileChange = (e, field) => {
+    setNewCarData({
+      ...newCarData,
+      [field]: e.target.files[0],
+    });
+  };
   // Other functions remain unchanged...
 
   if (loading) return <div className="loading">Loading...</div>;
