@@ -6,13 +6,12 @@ import {
   OrbitControls,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { La } from "../../3D/La";
-import { Fer } from "../../3D/Fer";
+import { F4 } from "../../3D/F4";
 
 // npm create vite@latest xxx
 // npm install
 
-const Ef = () => {
+const Ex = () => {
   const controlsRef = useRef();
 
   const sizes = {};
@@ -51,7 +50,7 @@ const Ef = () => {
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}
       >
-        <Fer position={[0, -0.3, 0]} scale={[1.3, 1.3, 1.3]}></Fer>
+        <F4 position={[0, -0.3, 0]} scale={[0.6, 0.6, 0.6]}></F4>
       </PresentationControls>
       {/* <ContactShadows position={[0, -0.1, 0]} opacity={0.75} scale={10} blur={3} far={4} /> */}
       <Environment preset="city" />
@@ -59,4 +58,4 @@ const Ef = () => {
   );
 };
 
-export default Ef;
+export default Ex;
