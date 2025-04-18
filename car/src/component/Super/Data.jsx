@@ -127,8 +127,7 @@ function Data({ filters }) {
             ))
           ) : (
             <div className="no-logos">
-              No cars found matching your criteria. Please try different
-              filters.
+              No cars found matching your option. Please try different select.
             </div>
           )}
         </div>

@@ -66,6 +66,7 @@ function SelectCar({ onFilterChange }) {
             <option value="BMW">BMW</option>
             <option value="Aston Martin">Aston Martin</option>
             <option value="Maserati">Maserati</option>
+            <option value="Nissan">Nissan</option>
           </select>
 
           <select

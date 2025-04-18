@@ -15,7 +15,7 @@ overflow: hidden;
 }
 
 .car-slideshow-container {
-  background-image: url('./old2.jpg');
+  
   background-size: cover;
   background-position: center;
   width: 100%;

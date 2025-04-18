@@ -119,8 +119,10 @@ export const updateLogo = async (req, res) => {
 export const deleteLogo = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(`Deleting logo with id: ${id}`);
 
     const deletedLogo = await Logo.findByIdAndDelete(id);
+    console.log("Deleted logo result:", deletedLogo);
 
     if (!deletedLogo) {
       return res.status(404).json({ message: "Logo not found" });
