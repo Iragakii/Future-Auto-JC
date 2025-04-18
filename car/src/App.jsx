@@ -8,6 +8,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./component/Admin/Admin";
 import Best from "./component/Super/SuperCar";
+import OldCar from "./component/OldCar/OldCar";
+import Race from "./component/Race/Race";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           element={<EmailVerify></EmailVerify>}
         ></Route>
         <Route path="/admin" element={<Admin></Admin>}></Route>
+        <Route path="/oldcar" element={<OldCar></OldCar>}></Route>
+        <Route path="/race" element={<Race></Race>}></Route>
       </Routes>
     </>
   );

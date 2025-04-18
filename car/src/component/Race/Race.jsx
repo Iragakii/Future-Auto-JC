@@ -3,13 +3,17 @@ import { Canvas } from "@react-three/fiber";
 import Ec from "../BestCar/Ec";
 import Ed from "../BestCar/Ed";
 import Data from "./Data";
-import "./SuperCar.css";
+import "./Race.css";
 import Header2 from "./Header2";
 import SelectCar from "./SelectCar";
 import El from "../BestCar/El";
 import Em from "../BestCar/Em";
+import Eo from "../BestCar/Eo";
+import Ep from "../BestCar/Ep";
+import Er from "../BestCar/Er";
+import Ex from "../BestCar/Ex";
 
-const Best = () => {
+const Race = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [filters, setFilters] = useState({
     km: "",
@@ -17,7 +21,7 @@ const Best = () => {
     location: "",
   });
 
-  const slides = [<Ed />, <Ec />, <El />, <Em />];
+  const slides = [<Ex />, <Ep />, <Er />, <Eo />];
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -125,4 +129,4 @@ const dotStyle = {
   transition: "background-color 0.3s",
 };
 
-export default Best;
+export default Race;

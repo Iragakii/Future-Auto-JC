@@ -338,6 +338,26 @@ const Admin = () => {
       [field]: e.target.files[0],
     });
   };
+
+  const handleDeleteUser = async (userId) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    try {
+      await axios.delete(`http://localhost:4000/api/admin/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("User deleted successfully!");
+      fetchUsers();
+    } catch (err) {
+      console.error("Error deleting user:", err);
+      alert(
+        `Error deleting user: ${err.response?.data?.message || err.message}`
+      );
+    }
+  };
+
   // Other functions remain unchanged...
 
   if (loading) return <div className="loading">Loading...</div>;
