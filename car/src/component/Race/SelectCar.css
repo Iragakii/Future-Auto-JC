@@ -1,58 +1,61 @@
 .tit-nav{
-    display: flex;
-    justify-content: space-between;
-  }
-  .sp-au{
-    font-family: "Nunito", Helvetica, Arial, sans-serif;
-    color:white;
-    font-weight: 700;
-    font-size: 35px;
-    margin-left: 60px;
-  }
-  .form-s{
-    margin: auto;
-    margin-left: 50px;
-  }
-  #year{
-    margin-right: 15px;
-    border-radius: 5px;
-    color: aliceblue;
-    background-color: gray;
-    padding: 10px 20px 10px 20px;
-    cursor: pointer;
-  }
-  #year:hover{
-    background-color: #387478;
-  }
-  #trans{
-    margin-right: 15px;
-    border-radius: 5px;
-    color: aliceblue;
-    background-color: gray;
-    padding: 10px 20px 10px 20px;
-    cursor: pointer;
-  }
-  #trans:hover{
-    background-color: #387478;
-  }
-  #body-style{
-    margin-right: 15px;
-    border-radius: 5px;
-    color: aliceblue;
-    background-color: gray;
-    padding: 10px 20px 10px 20px;
-    cursor: pointer;
-  }
-  #body-style:hover{
-    background-color: #387478;
-  }
-  .tit-right{
-    margin: auto;
-    margin-right: 70px;
-    font-family: "Nunito", Helvetica, Arial, sans-serif;
-  }
-  .sp-end{
-    text-decoration: none;
-    margin-right: 20px;
-    color: aliceblue;
-  }
+  display: flex;
+  
+  background-color: #BED754;
+  
+}
+.sp-au{
+  font-family: "Nunito", Helvetica, Arial, sans-serif;
+  color:white;
+  font-weight: 700;
+  font-size: 35px;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+.form-select-1{
+  margin-top: 40px;
+  margin-left: 50px;
+}
+#year{
+  margin-right: 15px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: gray;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+}
+#year:hover{
+  background-color: #387478;
+}
+#trans{
+  margin-right: 15px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: gray;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+}
+#trans:hover{
+  background-color: #387478;
+}
+#body-style{
+  margin-right: 15px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: gray;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+}
+#body-style:hover{
+  background-color: #387478;
+}
+.tit-right{
+  margin: auto;
+  margin-right: 70px;
+  font-family: "Nunito", Helvetica, Arial, sans-serif;
+}
+.sp-end{
+  text-decoration: none;
+  margin-right: 20px;
+  color: aliceblue;
+}

@@ -10,6 +10,7 @@ import Admin from "./component/Admin/Admin";
 import Best from "./component/Super/SuperCar";
 import OldCar from "./component/OldCar/OldCar";
 import Race from "./component/Race/Race";
+import About from "./component/About/About";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin" element={<Admin></Admin>}></Route>
         <Route path="/oldcar" element={<OldCar></OldCar>}></Route>
         <Route path="/race" element={<Race></Race>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
       </Routes>
     </>
   );

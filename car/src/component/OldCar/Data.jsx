@@ -91,47 +91,51 @@ function Data({ filters }) {
   }, [filters, logos]);
 
   return (
-    <div className="data-container">
-      {error && <div className="error-message">{error}</div>}
-      {loading ? (
-        <div className="loading">Loading logos...</div>
-      ) : (
-        <div className="cards">
-          {filteredLogos.length > 0 ? (
-            filteredLogos.map((logo) => (
-              <div className="card" key={logo._id}>
-                <div className="logo">
-                  <img
-                    src={logo.logoImage}
-                    alt={logo.title}
-                    onError={(e) => {
-                      console.error(`Image failed to load: ${logo.logoImage}`);
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://via.placeholder.com/150?text=Logo+Not+Found";
-                    }}
-                  />
-                </div>
-                <div className="contents">
-                  <span className="name">{logo.title}</span>
-                  <span className="content">{logo.content}</span>
-                  <div className="car-details">
-                    <span className="detail-item">KM: {logo.km}</span>
-                    <span className="detail-item">Brand: {logo.brand}</span>
-                    <span className="detail-item">
-                      Location: {logo.location}
-                    </span>
+    <div>
+      <div className="data-container">
+        {error && <div className="error-message">{error}</div>}
+        {loading ? (
+          <div className="loading">Loading logos...</div>
+        ) : (
+          <div className="cards">
+            {filteredLogos.length > 0 ? (
+              filteredLogos.map((logo) => (
+                <div className="card" key={logo._id}>
+                  <div className="logo">
+                    <img
+                      src={logo.logoImage}
+                      alt={logo.title}
+                      onError={(e) => {
+                        console.error(
+                          `Image failed to load: ${logo.logoImage}`
+                        );
+                        e.target.onerror = null;
+                        e.target.src =
+                          "https://via.placeholder.com/150?text=Logo+Not+Found";
+                      }}
+                    />
+                  </div>
+                  <div className="contents">
+                    <span className="name">{logo.title}</span>
+                    <span className="content">{logo.content}</span>
+                    <div className="car-details">
+                      <span className="detail-item">KM: {logo.km}</span>
+                      <span className="detail-item">Brand: {logo.brand}</span>
+                      <span className="detail-item">
+                        Location: {logo.location}
+                      </span>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="no-logos">
+                No cars found matching your option. Please try different select.
               </div>
-            ))
-          ) : (
-            <div className="no-logos">
-              No cars found matching your option. Please try different select.
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
       <Pagefour />
     </div>
   );

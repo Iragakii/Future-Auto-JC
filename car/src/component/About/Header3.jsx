@@ -6,9 +6,9 @@ import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { AppContent } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./Header2.css";
+import "./Header3.css";
 
-const Header2 = () => {
+const Header3 = () => {
   const navigate = useNavigate();
   const { userData, backendUrl, setUserData, setIsLoggedin } =
     useContext(AppContent);
@@ -66,33 +66,19 @@ const Header2 = () => {
   };
   return (
     <>
-      <div className="up">
-        <div className="header-2">
+      <div className="up-3">
+        <div className="header-3">
           <Link to="/">
-            <img src={logo} className="logo-ma"></img>
+            <img src={logo} className="logo-ma-3"></img>
           </Link>
-          <div className="up-left-2">
-            <Link className="up-home" to="/oldcar">
-              <span>OLD CAR</span>
-            </Link>
-            <Link className="up-home" to="/best">
-              <span>SUPER</span>
-            </Link>
 
-            <Link className="up-home" to="/race">
-              <span>RACE</span>
-            </Link>
-            <Link className="up-home" to="/about">
-              <span>ABOUT US</span>
-            </Link>
-          </div>
           <div className="up-right">
             <Link>
               <FontAwesomeIcon className="cart" icon={faCcJcb} />
             </Link>
             {userData ? (
               <div className="user-menu">
-                <div className="user-initial">
+                <div className="user-initial-3">
                   {userData.name?.charAt().toUpperCase()}
                   <div className="dropdown">
                     <ul>
@@ -116,7 +102,7 @@ const Header2 = () => {
   );
 };
 
-export default Header2;
+export default Header3;
 
 <div className="letter-icon">
   <span className="move-letter">

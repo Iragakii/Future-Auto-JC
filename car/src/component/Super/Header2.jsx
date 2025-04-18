@@ -82,7 +82,7 @@ const Header2 = () => {
             <Link className="up-home" to="/race">
               <span>RACE</span>
             </Link>
-            <Link className="up-home" to="">
+            <Link className="up-home" to="/about">
               <span>ABOUT US</span>
             </Link>
           </div>
