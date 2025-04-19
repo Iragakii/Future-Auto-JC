@@ -5,13 +5,12 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      react: path.resolve(__dirname, "node_modules/react"),
-      "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
-    },
+  // Removed resolve.alias for react and react-dom to avoid potential conflicts
+  optimizeDeps: {
+    include: ["react", "react-dom"],
+    exclude: ["@react-three/drei"],
+    dedupe: ["react", "react-dom"],
   },
-  // Removed optimizeDeps configuration as it did not resolve the error
   build: {
     rollupOptions: {
       output: {
