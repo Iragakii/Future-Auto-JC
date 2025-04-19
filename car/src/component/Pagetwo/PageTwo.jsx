@@ -150,7 +150,7 @@ const PageTwo = () => {
           <img
             src={
               currentCar.leftImage
-                ? `https://future-auto-jc.onrender.com:10000/${currentCar.leftImage}`
+                ? `https://future-auto-jc.onrender.com/${currentCar.leftImage}`
                 : ""
             }
             alt="Left car view"
@@ -172,7 +172,7 @@ const PageTwo = () => {
             <img
               src={
                 car.centerImage
-                  ? `https://future-auto-jc.onrender.com:10000/${car.centerImage}`
+                  ? `https://future-auto-jc.onrender.com/${car.centerImage}`
                   : ""
               }
               alt={car.title}
