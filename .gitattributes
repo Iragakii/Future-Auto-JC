@@ -2,3 +2,5 @@
 mclaren_mp45__www.vecarz.com.glb[[:space:]]is[[:space:]]105.75 filter=lfs diff=lfs merge=lfs -text
 *.glb filter=lfs diff=lfs merge=lfs -text
 car/public/*.glb filter=lfs diff=lfs merge=lfs -text
+*.glb !text !filter !merge !diff
+car/public/*.glb !text !filter !merge !diff
