@@ -28,6 +28,7 @@ try {
 const allowedOrigins = [
   "http://localhost:5173",
   "https://future-auto-jc.onrender.com",
+  "https://autojc.netlify.app",
   "*", // or actual frontend domain
 ];
 

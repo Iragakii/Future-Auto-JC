@@ -2,28 +2,35 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // Removed resolve.alias for react and react-dom to avoid potential conflicts
+  resolve: {
+    alias: {
+      react: path.resolve(__dirname, "./node_modules/react"),
+      "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+    },
+    dedupe: ["react-spring", "@react-spring/web", "@react-spring/core"],
+  },
   optimizeDeps: {
-    include: ["react", "react-dom"],
-    exclude: ["@react-three/drei"],
-    dedupe: ["react", "react-dom"],
+    esbuildOptions: {
+      keepNames: true, // This can help with initialization order issues
+    },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            if (id.includes("react") || id.includes("react-dom")) {
-              return "vendor";
-            }
-            return (
-              "vendor_" + id.toString().split("node_modules/")[1].split("/")[0]
-            );
-          }
-        },
+    minify: "terser", // Switch to terser
+    terserOptions: {
+      compress: {
+        keep_infinity: true,
+        pure_getters: true,
+        passes: 2,
+      },
+      mangle: {
+        // Don't mangle react-spring variables
+        reserved: ["un", "is", "to", "get", "set", "run", "key", "ref"],
+      },
+      format: {
+        comments: false,
+        preserve_annotations: true,
       },
     },
   },
