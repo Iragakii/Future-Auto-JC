@@ -1,2 +1,2 @@
-*.glb filter=lfs diff=lfs merge=lfs -text
-car/public/*.glb filter=lfs diff=lfs merge=lfs -text
+*.glb
+car/public/*.glb
