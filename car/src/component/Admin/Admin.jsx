@@ -48,7 +48,7 @@ const Admin = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "http://localhost:4000/api/admin/users",
+        "https://future-auto-jc.onrender.com:10000/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ const Admin = () => {
     console.log("Fetching logos..."); // Log fetching logos
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/admin/logos",
+        "https://future-auto-jc.onrender.com:10000/api/admin/logos",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -88,11 +88,14 @@ const Admin = () => {
   const fetchCars = async () => {
     console.log("Fetching cars..."); // Log fetching cars
     try {
-      const response = await axios.get("http://localhost:4000/api/admin/cars", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://future-auto-jc.onrender.com:10000/api/admin/cars",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setCars(response.data.cars);
     } catch (err) {
       console.error("Error fetching cars:", err);
@@ -123,7 +126,7 @@ const Admin = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:4000/api/admin/create-admin",
+        "https://future-auto-jc.onrender.com:10000/api/admin/create-admin",
         newAdminData,
         {
           headers: {
@@ -158,12 +161,16 @@ const Admin = () => {
         formData.append("leftImage", newCarData.leftImage);
       }
 
-      await axios.post("http://localhost:4000/api/car", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "https://future-auto-jc.onrender.com:10000/api/car",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("Car added successfully!");
       setNewCarData({
         title: "",
@@ -186,11 +193,14 @@ const Admin = () => {
     if (!window.confirm("Are you sure you want to delete this car?")) return;
 
     try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://future-auto-jc.onrender.com:10000/api/car/${carId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("Car deleted successfully!");
       fetchCars();
     } catch (err) {
@@ -209,11 +219,14 @@ const Admin = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:4000/api/admin/logos/${logoId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://future-auto-jc.onrender.com:10000/api/admin/logos/${logoId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("Logo deleted successfully!");
       fetchLogos(); // Refresh logos after deletion
     } catch (err) {
@@ -233,11 +246,14 @@ const Admin = () => {
       return;
 
     try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}/centerImage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://future-auto-jc.onrender.com:10000/api/car/${carId}/centerImage`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("Center image deleted successfully!");
       fetchCars();
     } catch (err) {
@@ -255,11 +271,14 @@ const Admin = () => {
       return;
 
     try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}/leftImage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://future-auto-jc.onrender.com:10000/api/car/${carId}/leftImage`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("Left image deleted successfully!");
       fetchCars();
     } catch (err) {
@@ -276,11 +295,14 @@ const Admin = () => {
     if (!window.confirm("Are you sure you want to delete the content?")) return;
 
     try {
-      await axios.delete(`http://localhost:4000/api/car/${carId}/content`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://future-auto-jc.onrender.com:10000/api/car/${carId}/content`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("Content deleted successfully!");
       fetchCars();
     } catch (err) {
@@ -308,12 +330,16 @@ const Admin = () => {
         formData.append("logoImage", newLogoData.logoImage);
       }
 
-      await axios.post("http://localhost:4000/api/admin/logos", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "https://future-auto-jc.onrender.com:10000/api/admin/logos",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("Logo created successfully!");
       setNewLogoData({
         title: "",
@@ -343,11 +369,14 @@ const Admin = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      await axios.delete(`http://localhost:4000/api/admin/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://future-auto-jc.onrender.com:10000/api/admin/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("User deleted successfully!");
       fetchUsers();
     } catch (err) {
@@ -470,7 +499,7 @@ const Admin = () => {
                 <div className="card" key={logo._id}>
                   <div className="logo">
                     <img
-                      src={`http://localhost:4000${logo.logoImage}`}
+                      src={`https://future-auto-jc.onrender.com:10000${logo.logoImage}`}
                       alt={logo.title}
                     />
                   </div>

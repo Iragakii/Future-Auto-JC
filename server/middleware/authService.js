@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const backendUrl = "http://localhost:4000"; // URL backend của bạn
+const backendUrl = "https://future-auto-jc.onrender.com"; // URL backend của bạn
 
 export const sendVerifyOtp = async (token) => {
   try {

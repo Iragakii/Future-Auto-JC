@@ -10,7 +10,7 @@ function Data({ filters }) {
   const [filteredLogos, setFilteredLogos] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const backendUrl = "http://localhost:4000"; // Set your backend URL
+  const backendUrl = "https://future-auto-jc.onrender.com:10000"; // Set your backend URL
 
   // Get token from localStorage for authentication
   const token = localStorage.getItem("token");

@@ -65,7 +65,9 @@ const PageTwo = () => {
   useEffect(() => {
     const fetchCarData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/car");
+        const response = await axios.get(
+          "https://future-auto-jc.onrender.com/api/car"
+        );
         setCarData(response.data.cars);
         setLoading(false);
       } catch (err) {
@@ -148,7 +150,7 @@ const PageTwo = () => {
           <img
             src={
               currentCar.leftImage
-                ? `http://localhost:4000/${currentCar.leftImage}`
+                ? `https://future-auto-jc.onrender.com:10000/${currentCar.leftImage}`
                 : ""
             }
             alt="Left car view"
@@ -170,7 +172,7 @@ const PageTwo = () => {
             <img
               src={
                 car.centerImage
-                  ? `http://localhost:4000/${car.centerImage}`
+                  ? `https://future-auto-jc.onrender.com:10000/${car.centerImage}`
                   : ""
               }
               alt={car.title}

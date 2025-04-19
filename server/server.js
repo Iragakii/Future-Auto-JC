@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 10000;
 
 // Connect to MongoDB with error handling
 try {
@@ -27,7 +27,8 @@ try {
 // Fixed allowed origins - remove space and add both server and frontend ports
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://localhost:5174", // or actual frontend domain
+  "https://future-auto-jc.onrender.com",
+  "*", // or actual frontend domain
 ];
 
 const corsOptions = {
