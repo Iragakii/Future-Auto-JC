@@ -1,0 +1,173 @@
+.carousel-container {
+    background-image: linear-gradient(to top right, #8B5CF6, #EC4899);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 600px;
+    overflow: visible;
+    margin: 0 auto;
+}
+
+.item {
+    position: absolute;
+    width: 400px;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+    left: calc(50% - 200px);
+    top: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-container {
+    height: 250px;
+    overflow: hidden;
+}
+
+.car-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.item:hover .car-image {
+    transform: scale(1.05);
+}
+
+.content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content h1 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.content p {
+    margin: 0 0 20px 0;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.item a {
+    text-decoration: none;
+    margin: 0 25px 25px 25px;
+}
+
+.item button {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #8B5CF6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.item button:hover {
+    background-color: #7C4DFF;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+#next {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#prev {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#prev, #next {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+#prev:hover,
+#next:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .slider {
+        height: 500px;
+    }
+    
+    .item {
+        width: 300px;
+        height: 450px;
+        left: calc(50% - 150px);
+    }
+    
+    .image-container {
+        height: 180px;
+    }
+    
+    .content h1 {
+        font-size: 20px;
+    }
+    
+    .content p {
+        font-size: 14px;
+    }
+    
+    .item a {
+        margin: 0 20px 20px 20px;
+    }
+    
+    .item button {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    
+    #prev, #next {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}

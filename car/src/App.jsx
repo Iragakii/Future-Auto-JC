@@ -11,6 +11,9 @@ import Best from "./component/Super/SuperCar";
 import OldCar from "./component/OldCar/OldCar";
 import Race from "./component/Race/Race";
 import About from "./component/About/About";
+import CharacterMovement from "./component/Pagethree/CharacterMovement";
+import Carousel from "./component/Slide/Carousel";
+import Explor from "./component/Explor/Explor";
 
 function App() {
   return (
@@ -30,6 +33,12 @@ function App() {
         <Route path="/oldcar" element={<OldCar></OldCar>}></Route>
         <Route path="/race" element={<Race></Race>}></Route>
         <Route path="/about" element={<About></About>}></Route>
+        <Route
+          path="/jcb"
+          element={<CharacterMovement></CharacterMovement>}
+        ></Route>
+        <Route path="/slide" element={<Carousel></Carousel>}></Route>
+        <Route path="/explor" element={<Explor></Explor>}></Route>
       </Routes>
     </>
   );

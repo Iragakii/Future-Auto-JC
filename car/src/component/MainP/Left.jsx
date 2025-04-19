@@ -1,5 +1,6 @@
 import React from "react";
 import "./Left.css";
+import { Link } from "react-router-dom";
 const Left = () => {
   return (
     <>
@@ -16,7 +17,9 @@ const Left = () => {
         </span>
         <div className="end-left-main">
           <button className="btn-left-main">Submit To Dealer </button>
-          <button className="btn-left-main-2">Explore</button>
+          <Link to="/explor">
+            <button className="btn-left-main-2">Explore</button>
+          </Link>
         </div>
       </div>
     </>

@@ -86,7 +86,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="up-right">
-            <Link>
+            <Link to="/jcb">
               <FontAwesomeIcon className="cart" icon={faCcJcb} />
             </Link>
             {userData ? (

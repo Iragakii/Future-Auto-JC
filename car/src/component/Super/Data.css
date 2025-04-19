@@ -5,6 +5,10 @@
   background-color:#BED754 ;
   
 }
+.slide-link {
+  text-decoration: none!important;
+  outline: none!important;  
+}
 
 .cards {
   display: flex;
@@ -13,6 +17,8 @@
   padding: 30px;
   justify-content: flex-start;
   cursor: pointer;
+  text-decoration: none!important;
+  outline: none!important;
   
 }
 
@@ -52,14 +58,14 @@
 .name {
   color: black;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 0;
 }
 
 .content {
-  color: whitesmoke;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: #8E1616!important;
+  font-size: 1rem!important;
+  font-weight: bold;
 }
 
 @media (max-width: 1024px) {
