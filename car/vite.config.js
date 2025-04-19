@@ -11,9 +11,7 @@ export default defineConfig({
       "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
     },
   },
-  optimizeDeps: {
-    exclude: ["its-fine"],
-  },
+  // Removed optimizeDeps configuration as it did not resolve the error
   build: {
     rollupOptions: {
       output: {
