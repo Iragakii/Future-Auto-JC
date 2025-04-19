@@ -83,3 +83,22 @@ hr.cigarette::after {
     20% { opacity: 0.5; }
     100% { transform: translateY(-50px) scale(2); opacity: 0; }
 }
+
+.intro {
+    position: relative;
+    top: 350px;
+    
+}
+.intro span {
+    color: #522546;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.intro  h3 {
+    margin-top: 35px;
+    color: #0D4715;
+}
+.h3-5 {
+    margin-top: 80px!important;
+    color: #E50046!important;
+}
