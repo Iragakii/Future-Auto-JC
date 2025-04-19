@@ -48,7 +48,7 @@ const Admin = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://future-auto-jc.onrender.com:10000/api/admin/users",
+        "https://future-auto-jc.onrender.com/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -71,15 +71,19 @@ const Admin = () => {
     console.log("Fetching logos..."); // Log fetching logos
     try {
       const response = await axios.get(
-        "https://future-auto-jc.onrender.com:10000/api/admin/logos",
+        "https://future-auto-jc.onrender.com/api/admin/logos",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setLogos(response.data.logos);
-      setFilteredLogos(response.data.logos); // Initialize filtered logos
+      if (response.data.success && Array.isArray(response.data.logos)) {
+        setLogos(response.data.logos);
+        setFilteredLogos(response.data.logos); // Initialize filtered logos
+      } else {
+        console.error("Invalid logos response format", response.data);
+      }
     } catch (err) {
       console.error("Error fetching logos:", err);
     }
@@ -89,7 +93,7 @@ const Admin = () => {
     console.log("Fetching cars..."); // Log fetching cars
     try {
       const response = await axios.get(
-        "https://future-auto-jc.onrender.com:10000/api/admin/cars",
+        "https://future-auto-jc.onrender.com/api/admin/cars",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -126,7 +130,7 @@ const Admin = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "https://future-auto-jc.onrender.com:10000/api/admin/create-admin",
+        "https://future-auto-jc.onrender.com/api/admin/create-admin",
         newAdminData,
         {
           headers: {
@@ -162,7 +166,7 @@ const Admin = () => {
       }
 
       await axios.post(
-        "https://future-auto-jc.onrender.com:10000/api/car",
+        "https://future-auto-jc.onrender.com/api/car",
         formData,
         {
           headers: {
@@ -194,7 +198,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `https://future-auto-jc.onrender.com:10000/api/car/${carId}`,
+        `https://future-auto-jc.onrender.com/api/car/${carId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -220,7 +224,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `https://future-auto-jc.onrender.com:10000/api/admin/logos/${logoId}`,
+        `https://future-auto-jc.onrender.com/api/admin/logos/${logoId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -247,7 +251,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `https://future-auto-jc.onrender.com:10000/api/car/${carId}/centerImage`,
+        `https://future-auto-jc.onrender.com/api/car/${carId}/centerImage`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -272,7 +276,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `https://future-auto-jc.onrender.com:10000/api/car/${carId}/leftImage`,
+        `https://future-auto-jc.onrender.com/api/car/${carId}/leftImage`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -296,7 +300,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `https://future-auto-jc.onrender.com:10000/api/car/${carId}/content`,
+        `https://future-auto-jc.onrender.com/api/car/${carId}/content`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -314,10 +318,6 @@ const Admin = () => {
   };
 
   const handleCreateLogo = async (e) => {
-    alert("Creating logo..."); // Alert when the function is called
-    alert("Logo data before submission: " + JSON.stringify(newLogoData)); // Alert the logo data
-    console.log("Creating logo..."); // Log when the function is called
-    console.log("Logo data before submission:", newLogoData); // Log the logo data
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -331,7 +331,7 @@ const Admin = () => {
       }
 
       await axios.post(
-        "https://future-auto-jc.onrender.com:10000/api/admin/logos",
+        "https://future-auto-jc.onrender.com/api/admin/logos",
         formData,
         {
           headers: {
@@ -370,7 +370,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `https://future-auto-jc.onrender.com:10000/api/admin/users/${userId}`,
+        `https://future-auto-jc.onrender.com/api/admin/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -499,7 +499,7 @@ const Admin = () => {
                 <div className="card" key={logo._id}>
                   <div className="logo">
                     <img
-                      src={`https://future-auto-jc.onrender.com:10000${logo.logoImage}`}
+                      src={`https://future-auto-jc.onrender.com${logo.logoImage}`}
                       alt={logo.title}
                     />
                   </div>
