@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
-import transporter from "../config/nodeMailer.js";
+import transporter from "../nodeMailer.js";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -9,12 +9,10 @@ export const register = async (req, res) => {
     return res.json({ success: false, message: "All fields are required" });
   }
   if (password.length < 6) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "Password must be at least 6 characters",
-      });
+    return res.status(400).json({
+      success: false,
+      message: "Password must be at least 6 characters",
+    });
   }
   try {
     const existingUser = await userModel.findOne({ email });
