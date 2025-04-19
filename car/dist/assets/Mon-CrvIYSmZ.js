@@ -1,4 +1,4 @@
-import{j as e}from"./index-B6QbhPiA.js";import{u as a}from"./Pagefour-DwCyO0_m.js";function r(r){const{nodes:_,materials:o}=a("/jiotto_caspita_f1_road_car_1989_by_alex.ka..glb");/* @__PURE__ */
+import{j as e}from"./index-oAyQ1r-q.js";import{u as a}from"./Pagefour-CJlE6DUk.js";function r(r){const{nodes:_,materials:o}=a("/jiotto_caspita_f1_road_car_1989_by_alex.ka..glb");/* @__PURE__ */
 return e.jsx("group",{...r,dispose:null,children:/* @__PURE__ */e.jsxs("group",{rotation:[-Math.PI/2,0,0],scale:1.053,children:[
 /* @__PURE__ */e.jsx("mesh",{castShadow:!0,receiveShadow:!0,geometry:_.Object_2.geometry,material:o.CASPITAspoiler}),
 /* @__PURE__ */e.jsx("mesh",{castShadow:!0,receiveShadow:!0,geometry:_.Object_3.geometry,material:o.JiottoCHRM_tex1}),

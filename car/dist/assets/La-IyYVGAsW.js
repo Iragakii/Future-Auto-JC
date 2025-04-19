@@ -1,4 +1,4 @@
-import{j as e}from"./index-B6QbhPiA.js";import{u as a}from"./Pagefour-DwCyO0_m.js";function t(t){const{nodes:o,materials:r}=a("/ferrari_laferrari__www.vecarz.com.glb");/* @__PURE__ */
+import{j as e}from"./index-oAyQ1r-q.js";import{u as a}from"./Pagefour-CJlE6DUk.js";function t(t){const{nodes:o,materials:r}=a("/ferrari_laferrari__www.vecarz.com.glb");/* @__PURE__ */
 return e.jsx("group",{...t,dispose:null,children:/* @__PURE__ */e.jsx("group",{rotation:[-1.582,0,-3.14],children:/* @__PURE__ */e.jsx("group",{rotation:[Math.PI/2,0,0],children:/* @__PURE__ */e.jsx("group",{rotation:[-1.582,.002,0],scale:.599,children:/* @__PURE__ */e.jsxs("group",{rotation:[Math.PI/2,0,0],scale:.01,children:[
 /* @__PURE__ */e.jsxs("group",{position:[.248,-3.485,0],rotation:[-Math.PI/2,0,-Math.PI],scale:5.308,children:[
 /* @__PURE__ */e.jsx("mesh",{castShadow:!0,receiveShadow:!0,geometry:o.Object_115.geometry,material:r["Material.144"],position:[-24.41,40.976,11.037],rotation:[0,0,-Math.PI],scale:.998}),
