@@ -86,8 +86,8 @@ app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter); // Admin routes
 app.use("/api/car", carRouter);
 
-// Catch-all route to serve frontend index.html for SPA routing
-app.get("*", (req, res) => {
+// Catch-all route to serve frontend index.html for SPA routing, excluding /api routes
+app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "..", "car", "public", "index.html"));
 });
 
