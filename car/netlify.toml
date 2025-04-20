@@ -1,3 +1,8 @@
+[build]
+  # Adjust these paths to match your project structure
+  publish = "car/dist"  # Or whatever your frontend build output directory is
+  command = "cd car && npm run build"  # Adjust based on your build process
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
