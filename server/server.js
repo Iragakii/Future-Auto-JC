@@ -78,7 +78,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Serve static files from car/public directory
 app.use(express.static(path.join(__dirname, "..", "car", "public")));
-
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "car", "public", "index.html"));
+});
 // API ENDPOINTS
 app.get("/", (req, res) => res.send("API Working!"));
 app.use("/api/auth", authRouter);
