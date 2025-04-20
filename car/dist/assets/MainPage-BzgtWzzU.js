@@ -1,4 +1,4 @@
-import{u as e,r as o,A as r,j as a,L as t,a as n,y as i}from"./index-oAyQ1r-q.js";import{u as s,a as _,P as l,E as m,C as d,b as c}from"./Pagefour-CJlE6DUk.js";import{l as h,F as g,f as S}from"./index-CnbVrLGL.js";import{u as C}from"./useAnimations-DCXGA-7e.js";const x=()=>{var s;const _=e(),{userData:l,backendUrl:m,setUserData:d,setIsLoggedin:c}=o.useContext(r);/* @__PURE__ */
+import{u as e,r as o,A as r,j as a,L as t,a as n,y as i}from"./index-1YW5aoMy.js";import{u as s,a as _,P as l,E as m,C as d,b as c}from"./Pagefour-5KQCwl9p.js";import{l as h,F as g,f as S}from"./index-BtH28K0Q.js";import{u as C}from"./useAnimations-BLmsMgC9.js";const x=()=>{var s;const _=e(),{userData:l,backendUrl:m,setUserData:d,setIsLoggedin:c}=o.useContext(r);/* @__PURE__ */
 return a.jsx(a.Fragment,{children:/* @__PURE__ */a.jsx("div",{className:"up",children:/* @__PURE__ */a.jsxs("div",{className:"header",children:[
 /* @__PURE__ */a.jsx(t,{to:"/",children:/* @__PURE__ */a.jsx("img",{src:h,className:"logo-ma"})}),
 /* @__PURE__ */a.jsxs("div",{className:"up-left",children:[

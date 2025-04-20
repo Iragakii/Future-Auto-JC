@@ -72,9 +72,14 @@ if (!fs.existsSync(carsDir)) {
   console.log("Created cars upload directory");
 }
 
+import path from "path";
+
 // Static file serving
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Serve static files from car/public directory
+app.use(express.static(path.join(__dirname, "..", "car", "public")));
 
 // API ENDPOINTS
 app.get("/", (req, res) => res.send("API Working!"));
